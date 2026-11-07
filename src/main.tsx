@@ -14,6 +14,7 @@ const hashHistory = createHashHistory();
 // Set up a Router instance
 const router = createRouter({
   routeTree,
+  basepath: "/uef-final-project/",
   defaultPreload: "intent",
   history: hashHistory,
   scrollRestoration: true,
