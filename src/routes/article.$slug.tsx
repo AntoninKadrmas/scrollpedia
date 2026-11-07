@@ -16,11 +16,15 @@ function RouteComponent() {
   //   },
   // });
   const data = MockArticle;
+  const fullUrl = window.location.href.split("/");
+  const replaceUrl = fullUrl.slice(0, -1).join("/");
   return (
     <div className="article-page" data-bs-theme="dark">
-      
       <MdArticle
-        markdown={data.markdown}
+        markdown={data.markdown.replaceAll(
+          "https://www.edgechat.ai",
+          replaceUrl,
+        )}
       />
     </div>
   );

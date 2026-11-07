@@ -1,7 +1,7 @@
 import { Markdown } from "@tanstack/markdown/react";
 import type { MarkdownExtension } from "@tanstack/markdown";
 import { FC, HTMLAttributes } from "react";
-import "./article.css";
+import "./md-article.css";
 
 type articleProps = {
   className?: string;
@@ -39,6 +39,28 @@ export const MdArticle: FC<articleProps> = ({ markdown, ...props }) => {
       <Markdown
         extensions={[superscriptExtension]}
         components={{
+          a: ({ href, children, ...linkProps }) => {
+            let isExternal = false;
+
+            if (href && typeof window !== "undefined") {
+              try {
+                const url = new URL(href, window.location.href);
+                isExternal = url.origin !== window.location.origin;
+              } catch {}
+            }
+
+            return (
+              <a
+                {...linkProps}
+                href={href}
+                className={isExternal ? "text-accent" : "text-info"}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+              >
+                {children}
+              </a>
+            );
+          },
           table: ({ children, ...tableProps }) => (
             <div
               className="markdown-table-scroll"
