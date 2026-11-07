@@ -1,20 +1,37 @@
-import { useQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Card, CardBody, CardText, CardTitle } from "react-bootstrap";
+import { MockRandom } from "../types/random";
 
-const Home = () => {
-  const { data } = useQuery({
-    queryKey: ["random"],
-    queryFn: async () => {
-      const response = await fetch("https://www.edgechat.ai/api/v1/random");
-      return response.json();
-    },
-  });
+export const Route = createFileRoute("/")({
+  component: Home,
+});
+
+function Home() {
+  // const { data } = useQuery<ResponseRandom>({
+  //   queryKey: ["random"],
+  //   queryFn: async () => {
+  //     const response = await fetch("https://www.edgechat.ai/api/v1/random");
+  //     return response.json();
+  //   },
+  // });
+  const data = MockRandom;
   console.log(data);
-  ``;
   return (
-    <div className="position-relative overflow-hidden vw-100 vh-100">
+    <div className="position-relative overflow-hidden vw-100 vh-100 d-flex justify-content-center align-items-center">
+      <Link
+        to="/article/$slug"
+        params={{ slug: data.result.slug }}
+        className="text-decoration-none"
+      >
+        <Card className="glass">
+          <CardBody>
+            <CardTitle>{data?.result?.title}</CardTitle>
+            <CardText>{data?.result?.excerpt}</CardText>
+          </CardBody>
+        </Card>
+      </Link>
       <div
-        className="position-absolute top-0 start-0 vw-100 vh-100"
+        className="position-absolute top-0 start-0 vw-100 vh-100 z-n1"
         style={{
           filter: "blur(150px)",
           backgroundImage: "linear-gradient(#6e20ff, #ef7be9)",
@@ -25,10 +42,4 @@ const Home = () => {
       />
     </div>
   );
-};
-
-
-export const Route = createFileRoute("/")({
-  component: Home,
-});
-
+}
