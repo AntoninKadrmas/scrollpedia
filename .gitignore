@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+*.gen.ts
+*.gen.tsx
+.tanstack
