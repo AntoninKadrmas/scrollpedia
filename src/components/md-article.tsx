@@ -1,6 +1,7 @@
 import { Markdown } from "@tanstack/markdown/react";
 import type { MarkdownExtension } from "@tanstack/markdown";
 import { FC, HTMLAttributes } from "react";
+import Table from "react-bootstrap/Table";
 import "./md-article.css";
 
 type articleProps = {
@@ -63,12 +64,14 @@ export const MdArticle: FC<articleProps> = ({ markdown, ...props }) => {
           },
           table: ({ children, ...tableProps }) => (
             <div
-              className="markdown-table-scroll"
+              className="my-4"
               role="region"
               aria-label="Article table"
               tabIndex={0}
             >
-              <table {...tableProps}>{children}</table>
+              <Table {...tableProps} striped bordered responsive variant="dark">
+                {children}
+              </Table>
             </div>
           ),
         }}

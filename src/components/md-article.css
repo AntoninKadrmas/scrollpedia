@@ -5,10 +5,11 @@
 
 .article-page {
   min-height: 100dvh;
-  padding: 4rem 1.5rem 6rem;
-  background: #151618;
-  color: #c7c9ce;
-  color-scheme: dark;
+  padding: 0rem 2rem 6rem;
+}
+
+.article-header {
+  padding: 2rem 0rem 0rem;
 }
 
 .markdown-content {
@@ -94,49 +95,18 @@
   text-decoration: underline;
 }
 
-.markdown-table-scroll {
-  max-width: 100%;
-  overflow-x: auto;
-  margin: 1.5rem 0 2rem;
-  scrollbar-color: #535762 #1c1e22;
-  border: 1px solid var(--article-border);
+/* Keep readable columns; Bootstrap's responsive wrapper handles overflow. */
+.markdown-content .table {
+  min-width: 36rem;
+  overflow-wrap: normal;
 }
 
-.markdown-content table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
-
-.markdown-content :is(th, td) {
-  padding: 0.65rem 0.85rem;
-  border-right: 1px solid var(--article-border);
-  border-bottom: 1px solid var(--article-border);
-  vertical-align: top;
+.markdown-content .table :is(th, td) {
   min-width: 8rem;
 }
 
-.markdown-content th {
-  background: #242731;
-  color: #e0e5f3;
-  font-weight: 650;
-}
-.markdown-content td {
-  background: #191b1f;
-}
-.markdown-content tr:nth-child(even) td {
-  background: #1d1f24;
-}
-.markdown-content tr > :last-child {
-  border-right: 0;
-}
-.markdown-content tbody tr:last-child td {
-  border-bottom: 0;
-}
-.markdown-content td:first-child {
-  width: 22%;
-  color: #dce0e7;
+.markdown-content .table a {
+  overflow-wrap: anywhere;
 }
 
 .markdown-content :is(ul, ol) {
@@ -204,7 +174,10 @@
 
 @media (max-width: 600px) {
   .article-page {
-    padding: 2rem 1rem 3rem;
+    padding: 0rem 1rem 3rem;
+  }
+  .article-header {
+    padding: 1rem 0rem 0rem;
   }
   .markdown-content {
     font-size: 1rem;
@@ -213,11 +186,5 @@
   .markdown-content h2 {
     font-size: 1.3rem;
     margin-top: 1.75rem;
-  }
-  .markdown-content :is(th, td) {
-    padding: 0.6rem 0.7rem;
-  }
-  .markdown-content table {
-    min-width: 30rem;
   }
 }

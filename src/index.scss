@@ -1,6 +1,11 @@
 // Import all of Bootstrap’s CSS
 @use "bootstrap/scss/bootstrap";
 
+body{
+  background: #151618;
+  color: #c7c9ce;
+  color-scheme: dark;
+}
 
 .glass {
   background: rgba(255, 255, 255, 0.1);
