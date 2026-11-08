@@ -22,7 +22,8 @@
     "react": "^19.3.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.3.1",
-    "vanilla-calendar-pro": "^3.4.0"
+    "vanilla-calendar-pro": "^3.4.0",
+    "zustand": "^5.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
