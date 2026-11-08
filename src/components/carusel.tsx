@@ -1,10 +1,11 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { EmblaCarouselType } from "embla-carousel";
 import { FC, HTMLAttributes, useCallback, useEffect } from "react";
-import { ResponseRandom } from "../types/random";
+import { ResponseRandom } from "@/types/random";
 import "./embla.css";
 import { Link } from "@tanstack/react-router";
 import {
+  Button,
   Card,
   CardBody,
   CardSubtitle,
@@ -12,8 +13,8 @@ import {
   CardTitle,
   Placeholder,
 } from "react-bootstrap";
-import { useArticleStore } from "../store/use-article-store";
-import { getWikipediaImage } from "../utils/image";
+import { useArticleStore } from "@/store/use-article-store";
+import { AsciiAvatar } from "@/components/ascii/ascii-avatar";
 type EmblaCarouselProps = {
   slides: ResponseRandom[];
   position: number;
@@ -49,35 +50,36 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
     emblaApi.scrollTo(props.position, true);
   }, [emblaApi, props.position]);
 
-  useEffect(() => {
-    getWikipediaImage(slides[props.position]?.result?.slug).then((image) => {
-      console.log(image);
-      console.log(slides[props.position]?.result?.slug);
-    });
-  }, [emblaApi, slides, props.position]);
-
   return (
     <div {...props} className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((data, index) => (
             <div className="embla__slide" key={index}>
-              <Link
-                to="/$slug"
-                params={{ slug: data?.result?.slug }}
-                className="text-decoration-none"
-              >
-                <Card className="glass h-100 rounded-0">
-                  <CardBody>
-                    <CardTitle>{data?.result?.title}</CardTitle>
-                    <CardSubtitle>{data?.result?.topic}</CardSubtitle>
-                    <CardText className="mt-1">{data?.result?.excerpt}</CardText>
-                    <div className="d-flex justify-content-end text-muted mt-auto">
-                      <CardText>Read more...</CardText>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Link>
+              <Card className="glass h-100 rounded-0">
+                <CardBody>
+                  <CardTitle>{data?.result?.title}</CardTitle>
+                  <AsciiAvatar
+                    name={data?.result?.slug}
+                    colored={false}
+                    width="auto"
+                    height={10}
+                    className="w-100 align-self-center mb-3 mt-2 text-center"
+                  />
+                  <CardSubtitle>{data?.result?.topic}</CardSubtitle>
+                  <br />
+                  <CardText>{data?.result?.excerpt}</CardText>
+                  <Link
+                    to="/$slug"
+                    params={{ slug: data?.result?.slug }}
+                    className="text-decoration-none"
+                  >
+                    <Button variant="secondary" className="w-100 mt-auto">
+                      Read more...
+                    </Button>
+                  </Link>
+                </CardBody>
+              </Card>
             </div>
           ))}
           {isLoading && (

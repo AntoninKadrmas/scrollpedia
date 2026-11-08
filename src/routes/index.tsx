@@ -1,18 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Card,
-  CardBody,
-  CardLink,
-  CardText,
-  CardTitle,
-  Placeholder,
-} from "react-bootstrap";
-import { MockRandom, ResponseRandom } from "../types/random";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
 import { useRandom } from "../hooks/use-random";
 import { useArticleStore } from "../store/use-article-store";
 import { EmblaCarousel } from "../components/carusel";
-import { generateGradient } from "@marko19907/string-to-color";
 import { Background } from "../components/background";
 
 export const Route = createFileRoute("/")({

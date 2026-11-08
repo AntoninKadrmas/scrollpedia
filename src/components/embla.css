@@ -1,4 +1,6 @@
 .embla {
+  width: 100%;
+  min-width: 0;
   max-width: 48rem;
   margin: auto;
 

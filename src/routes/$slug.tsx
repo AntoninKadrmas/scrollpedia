@@ -1,9 +1,7 @@
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { MockArticle, ResponseArticle } from "../types/article";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { MockArticle } from "../types/article";
 import { MdArticle } from "../components/md-article";
 import { ArrowLeft } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { ResponseRandom } from "../types/random";
 import { Button, Placeholder } from "react-bootstrap";
 import { Background } from "../components/background";
 
