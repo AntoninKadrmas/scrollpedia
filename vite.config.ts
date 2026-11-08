@@ -1,10 +1,14 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
   base: "/uef-final-project/",
+  resolve: {
+    tsconfigPaths: true,
+  },
   plugins: [
     tanstackRouter({
       target: "react",
@@ -13,5 +17,6 @@ export default defineConfig({
       generatedRouteTree: "./src/routeTree.gen.ts",
     }),
     react(),
+    tailwindcss(),
   ],
 });
