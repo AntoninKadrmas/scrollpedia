@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="200" viewBox="0 0 180 220" fill="none" role="img" aria-labelledby="swipe-title swipe-desc">
+  <title id="swipe-title">Swipe up</title>
+  <desc id="swipe-desc">An outlined hand moves upward and fades in and out while staying fully inside the frame.</desc>
+  <style>
+    .swipe-motion {
+      transform-box: view-box;
+      transform-origin: center;
+      animation: swipe-up 2.8s cubic-bezier(.4, 0, .2, 1) infinite;
+    }
+    .touch-halo {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: touch-pulse 2.8s ease-out infinite;
+    }
+    @keyframes swipe-up {
+      0%, 10% {
+        transform: translateY(24px);
+        opacity: 0;
+      }
+      18% {
+        transform: translateY(24px);
+        opacity: .82;
+      }
+      66% {
+        transform: translateY(-18px);
+        opacity: .82;
+      }
+      84%, 100% {
+        transform: translateY(-18px);
+        opacity: 0;
+      }
+    }
+    @keyframes touch-pulse {
+      0%, 10% {
+        opacity: 0;
+        transform: scale(.62);
+      }
+      18% {
+        opacity: .52;
+        transform: scale(.78);
+      }
+      40% {
+        opacity: .12;
+        transform: scale(1.22);
+      }
+      58%, 100% {
+        opacity: 0;
+        transform: scale(1.36);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .swipe-motion, .touch-halo { animation: none; }
+      .swipe-motion { transform: translateY(0); opacity: .8; }
+      .touch-halo { display: none; }
+    }
+  </style>
+
+  <g class="swipe-motion">
+    <g transform="rotate(-12 106 115)">
+      <circle class="touch-halo" cx="92" cy="42" r="19"
+              stroke="#F6F2FA" stroke-opacity=".65" stroke-width="2"/>
+
+      <path d="M82 135
+               V51
+               C82 43 86 38 93 38
+               C100 38 104 43 104 51
+               V102
+               V94
+               C104 86 108 82 114 82
+               C120 82 124 87 124 94
+               V105
+               V100
+               C124 92 128 88 134 88
+               C140 88 144 93 144 100
+               V112
+               V110
+               C144 103 149 99 155 100
+               C161 101 164 106 164 112
+               V147
+               C164 168 152 182 132 184
+               H110
+               C93 184 82 177 76 165
+               L54 127
+               C50 120 53 114 59 112
+               C65 110 70 114 73 120
+               L82 135 Z"
+            fill="#F6F2FA" fill-opacity=".07"
+            stroke="#F6F2FA" stroke-opacity=".94"
+            stroke-width="3.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+</svg>
