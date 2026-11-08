@@ -4,12 +4,19 @@ import { FC, HTMLAttributes, useState } from "react";
 import { Button } from "react-bootstrap";
 import "./search-button.css";
 import { SearchContent } from "./search-content";
+import { Children } from "@/types/subtopic";
 
 type SearchButtonProps = {
   className?: string;
+  subcategories?: Children[];
+  categoryId: string | null;
 } & HTMLAttributes<HTMLOrSVGElement>;
 
-export const SearchButton: FC<SearchButtonProps> = ({ ...props }) => {
+export const SearchButton: FC<SearchButtonProps> = ({
+  subcategories = [],
+  categoryId,
+  ...props
+}) => {
   const [startSearch, setStartSearch] = useState(false);
   const [searchSlug, setSearchSlug] = useState("");
   const onSubmit = (e: React.FormEvent<HTMLFormElement>, newData: string) => {
@@ -26,7 +33,11 @@ export const SearchButton: FC<SearchButtonProps> = ({ ...props }) => {
       )}
       {startSearch && (
         <div className="max-width-50 vh-100 vw-100 z-2 position-absolute">
-          <SearchContent slug={searchSlug} />
+          <SearchContent
+            slug={searchSlug}
+            categoryId={categoryId}
+            onClose={() => setStartSearch(false)}
+          />
         </div>
       )}
       {startSearch && (

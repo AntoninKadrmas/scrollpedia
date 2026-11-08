@@ -7,7 +7,10 @@ type ArticleStore = {
   articlesMap: Map<string, ResponseRandom>;
   addArticle: (article: ResponseRandom) => void;
   setPosition: (position: number) => void;
+  setCategory: (category: string | null) => void;
+  clearArticles: () => void;
   position: number;
+  category: string | null;
 };
 
 function clampPosition(position: number, count: number) {
@@ -20,6 +23,7 @@ export const useArticleStore = create<ArticleStore>()(
       articles: [],
       articlesMap: new Map(),
       position: 0,
+      category: null,
       addArticle: (article) =>
         set((state) => {
           if (state.articlesMap.has(article.result.slug)) {
@@ -39,12 +43,22 @@ export const useArticleStore = create<ArticleStore>()(
             ? clampPosition(position, state.articles.length)
             : state.position,
         })),
+      setCategory: (category) =>
+        set(() => ({
+          category,
+        })),
+      clearArticles: () =>
+        set(() => ({
+          articles: [],
+          position: 0,
+        })),
     }),
     {
       name: "article-store",
       partialize: (state) => ({
         articles: state.articles,
         position: state.position,
+        category: state.category,
       }),
       merge: (persisted, current) => {
         const saved = persisted as ArticleStore | undefined;
@@ -53,13 +67,14 @@ export const useArticleStore = create<ArticleStore>()(
           articles.map((article) => [article.result.slug, article] as const),
         );
         const position = saved?.position ?? 0;
+        const category = saved?.category ?? null;
         return {
           ...current,
-          articles,
           articlesMap,
           position: Number.isFinite(position)
             ? clampPosition(position, articles.length)
             : 0,
+          category,
         };
       },
     },

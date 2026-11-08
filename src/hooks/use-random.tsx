@@ -7,16 +7,25 @@ const FETCH_AMOUNT = 5;
 const REFETCH_BEFORE = 2;
 const TRIES = 3;
 
-async function fetchRandomBatch({ signal }: { signal: AbortSignal }) {
+async function fetchRandomBatch({
+  signal,
+  categoryId,
+}: {
+  signal: AbortSignal;
+  categoryId: string | null;
+}) {
   let added = 0;
 
   // Each round requests only the number of articles still missing.
   for (let attempt = 0; attempt < TRIES && added < FETCH_AMOUNT; attempt++) {
     const batch = await Promise.all(
       Array.from({ length: FETCH_AMOUNT - added }, async () => {
-        const response = await fetch("https://www.edgechat.ai/api/v1/random", {
-          signal,
-        });
+        const response = await fetch(
+          `https://www.edgechat.ai/api/v1/random${categoryId ? `?topic=${categoryId}` : ""}`,
+          {
+            signal,
+          },
+        );
         if (!response.ok) {
           throw new Error(
             `Error while loading the article (${response.status}).`,
@@ -46,12 +55,12 @@ async function fetchRandomBatch({ signal }: { signal: AbortSignal }) {
   return added;
 }
 
-export const useRandom = () => {
+export const useRandom = ({ categoryId }: { categoryId: string | null }) => {
   const position = useArticleStore((state) => state.position);
   const count = useArticleStore((state) => state.articles.length);
   const { isFetching, isError, error, refetch } = useQuery({
-    queryKey: ["random"],
-    queryFn: fetchRandomBatch,
+    queryKey: ["random", categoryId],
+    queryFn: ({ signal }) => fetchRandomBatch({ signal, categoryId }),
     enabled: false,
     retry: false,
   });

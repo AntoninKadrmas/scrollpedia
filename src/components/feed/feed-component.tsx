@@ -1,0 +1,56 @@
+import { useRandom } from "@/hooks/use-random";
+import { Background } from "@/components/background";
+import { SearchButton } from "@/components/search-button";
+import { useArticleStore } from "@/store/use-article-store";
+import { EmblaCarousel } from "../embla-carusel";
+import { useQuery } from "@tanstack/react-query";
+import { ResponseSubtopic } from "@/types/subtopic";
+import { useEffect } from "react";
+
+export const FeedComponent = ({
+  categoryId,
+}: {
+  categoryId: string | null;
+}) => {
+  const { data: topicData } = useQuery<ResponseSubtopic>({
+    queryKey: ["topic", categoryId],
+    queryFn: async () => {
+      const response = await fetch(
+        `https://www.edgechat.ai/api/v1/topics/${categoryId}`,
+      );
+      return response.json();
+    },
+    enabled: !!categoryId,
+  });
+  const { isLoading, refetch } = useRandom({ categoryId });
+  const articles = useArticleStore((state) => state.articles);
+  const position = useArticleStore((state) => state.position);
+  const category = useArticleStore((state) => state.category);
+  const setCategory = useArticleStore((state) => state.setCategory);
+  const clearArticles = useArticleStore((state) => state.clearArticles);
+  const data = articles[position];
+
+  useEffect(() => {
+    if (categoryId !== category) {
+      setCategory(categoryId);
+      clearArticles();
+      refetch();
+    }
+  }, [categoryId, category]);
+
+  return (
+    <div className="position-relative overflow-hidden vw-100 vh-100 d-flex justify-content-center align-items-center flex-column">
+      <EmblaCarousel
+        slides={articles}
+        position={position}
+        isLoading={isLoading}
+        topicPath={topicData?.path}
+      />
+      <Background value={data?.result?.slug} />
+      <SearchButton
+        categoryId={categoryId}
+        subcategories={topicData?.children ?? []}
+      />
+    </div>
+  );
+};
