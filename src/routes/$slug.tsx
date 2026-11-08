@@ -4,7 +4,7 @@ import { MdArticle } from "../components/md-article";
 import { ArrowLeft } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { ResponseRandom } from "../types/random";
-import { Button } from "react-bootstrap";
+import { Button, Placeholder } from "react-bootstrap";
 
 export const Route = createFileRoute("/$slug")({
   component: RouteComponent,
@@ -14,7 +14,7 @@ function RouteComponent() {
   const router = useRouter();
 
   // const { slug } = Route.useParams();
-  // const { data } = useQuery<ResponseArticle>({
+  // const { data, isLoading } = useQuery<ResponseArticle>({
   //   queryKey: ["article", slug],
   //   queryFn: async () => {
   //     const response = await fetch(
@@ -24,6 +24,7 @@ function RouteComponent() {
   //   },
   // });
   const data = MockArticle;
+  const isLoading = false;
   const fullUrl = window.location.href.split("/");
   const replaceUrl = fullUrl.slice(0, -1).join("/");
   return (
@@ -40,12 +41,33 @@ function RouteComponent() {
           <ArrowLeft />
         </Button>
       </div>
-      <MdArticle
-        markdown={
-          data?.markdown?.replaceAll("https://www.edgechat.ai", replaceUrl) ??
-          ""
-        }
-      />
+      {isLoading && (
+        <div>
+          <Placeholder as="h1" animation="glow">
+            <Placeholder xs={6} />
+          </Placeholder>
+          <Placeholder as="p" animation="glow">
+            <Placeholder xs={12} />
+            <Placeholder xs={11} />
+            <Placeholder xs={10} />
+            <Placeholder xs={11} />
+            <Placeholder xs={12} />
+            <Placeholder xs={11} />
+          </Placeholder>
+          <Placeholder as="small" animation="glow">
+            <Placeholder xs={8} />
+            <Placeholder xs={10} />
+          </Placeholder>
+        </div>
+      )}
+      {!isLoading && (
+        <MdArticle
+          markdown={
+            data?.markdown?.replaceAll("https://www.edgechat.ai", replaceUrl) ??
+            ""
+          }
+        />
+      )}
     </div>
   );
 }

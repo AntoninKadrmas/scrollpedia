@@ -1,7 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Card, CardBody, CardLink, CardText, CardTitle } from "react-bootstrap";
+import {
+  Card,
+  CardBody,
+  CardLink,
+  CardText,
+  CardTitle,
+  Placeholder,
+} from "react-bootstrap";
 import { MockRandom, ResponseRandom } from "../types/random";
-import { useQuery } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
+import { useRandom } from "../hooks/use-random";
+import { useArticleStore } from "../store/use-article-store";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -15,10 +24,32 @@ function Home() {
   //     return response.json();
   //   },
   // });
-  const data = MockRandom;
-  console.log(data);
+  const { isLoading } = useRandom();
+  const articles = useArticleStore((state) => state.articles);
+  const position = useArticleStore((state) => state.position);
+  const data = articles[position];
   return (
-    <div className="position-relative overflow-hidden vw-100 vh-100 d-flex justify-content-center align-items-center">
+    <div className="position-relative overflow-hidden vw-100 vh-100 d-flex justify-content-center align-items-center flex-column">
+      {isLoading && (
+        <Card className="glass w-100">
+          <CardBody>
+            <Placeholder as={CardTitle} animation="glow">
+              <Placeholder xs={10} />
+            </Placeholder>
+            <Placeholder as={CardText} animation="glow">
+              <Placeholder xs={12} />
+              <Placeholder xs={8} />
+              <Placeholder xs={10} />
+              <Placeholder xs={6} />
+            </Placeholder>
+            <div className="w-full text-end">
+              <Placeholder as={CardText} animation="glow">
+                <Placeholder xs={3} />
+              </Placeholder>
+            </div>
+          </CardBody>
+        </Card>
+      )}
       <Link
         to="/$slug"
         params={{ slug: data?.result?.slug }}
