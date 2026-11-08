@@ -85,7 +85,7 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
                   />
                   <CardSubtitle>{data?.result?.topic}</CardSubtitle>
                   <br />
-                  <CardText>{data?.result?.excerpt}</CardText>
+                  <CardText>{data?.result?.snippet}</CardText>
                   <br />
                   <Link
                     to="/$slug"
@@ -110,7 +110,7 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
           )}
         </div>
       </div>
-      <div className="embla__arrows d-none d-md-flex flex-column ms-2 gap-2 h-100 justify-content-end pb-2">
+      <div className="embla__arrows d-none d-lg-flex flex-column ms-2 gap-1 h-100 justify-content-end position-absolute end-0 me-5 bottom-50">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>

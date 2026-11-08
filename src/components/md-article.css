@@ -174,7 +174,7 @@
   margin-bottom: 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .article-page {
     padding: 0rem 1rem 3rem;
   }

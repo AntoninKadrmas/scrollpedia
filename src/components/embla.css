@@ -9,9 +9,9 @@
   --slide-size: 100%;
 }
 
-.embla__viewport {
+/* .embla__viewport {
   overflow: hidden;
-}
+} */
 
 .embla__container {
   display: flex;

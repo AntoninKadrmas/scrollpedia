@@ -46,7 +46,7 @@ function RouteComponent() {
           <div className="position-relative overflow-hidden rounded-5">
             <div className="glass d-flex justify-content-between align-items-center">
               <div
-                className="d-flex w-100 align-items-center gap-3"
+                className="d-flex w-100 align-items-center gap-2"
                 style={{ minWidth: 0 }}
               >
                 <Button
@@ -64,17 +64,7 @@ function RouteComponent() {
                     className="d-flex flex-column lh-1 text-white flex-grow-1"
                     style={{ minWidth: 0 }}
                   >
-                    <span
-                      style={{
-                        marginBottom: "0.15rem",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                        width: "100%",
-                      }}
-                    >
-                      {data?.title}
-                    </span>
+                    <span className="line-clamp">{data?.title}</span>
                     <small>
                       {DateTime.fromSQL(data?.updated).toLocaleString(
                         DateTime.DATETIME_MED_WITH_WEEKDAY,
