@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardBody, CardLink, CardText, CardTitle } from "react-bootstrap";
-import { MockRandom } from "../types/random";
+import { MockRandom, ResponseRandom } from "../types/random";
+import { useQuery } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -20,7 +21,7 @@ function Home() {
     <div className="position-relative overflow-hidden vw-100 vh-100 d-flex justify-content-center align-items-center">
       <Link
         to="/$slug"
-        params={{ slug: data.result.slug }}
+        params={{ slug: data?.result?.slug }}
         className="text-decoration-none"
       >
         <Card className="glass">
