@@ -1,0 +1,36 @@
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+.search-input-form {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.max-width-50 {
+  max-width: 50rem;
+}
+
+.search-button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.search-content {
+  height: calc(100% - 3rem);
+}
+
+@media (max-width: 768px) {
+  .search-content {
+    height: calc(100% - 1.5rem);
+  }
+}

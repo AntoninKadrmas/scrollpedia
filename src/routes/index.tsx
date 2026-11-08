@@ -3,6 +3,7 @@ import { useRandom } from "../hooks/use-random";
 import { useArticleStore } from "../store/use-article-store";
 import { EmblaCarousel } from "../components/embla-carusel";
 import { Background } from "../components/background";
+import { SearchButton } from "@/components/search-button";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -21,6 +22,7 @@ function Home() {
         isLoading={isLoading}
       />
       <Background value={data?.result?.slug} />
+      <SearchButton />
     </div>
   );
 }
