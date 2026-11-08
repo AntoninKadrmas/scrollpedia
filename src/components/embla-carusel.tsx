@@ -64,7 +64,7 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
 
   return (
     <div {...props} className="embla d-flex">
-      <div className="embla__viewport" ref={emblaRef}>
+      <div className="embla__viewport w-100" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((data, index) => (
             <div className="embla__slide" key={data.result.id}>

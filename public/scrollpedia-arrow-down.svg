@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" fill="none" aria-label="Bílá vlnitá šipka dolů" role="img">
+  <path
+    d="M60 24 C42 40 84 55 60 76 C38 95 82 112 60 134 C42 151 76 167 60 184"
+    stroke="#FFFFFF"
+    stroke-width="7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M34 160 L60 192 L86 160"
+    stroke="#FFFFFF"
+    stroke-width="7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
