@@ -1,10 +1,11 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { MockArticle } from "../types/article";
+import { ResponseArticle } from "../types/article";
 import { MdArticle } from "../components/md-article";
 import { ArrowLeft } from "lucide-react";
 import { Button, Placeholder } from "react-bootstrap";
 import { Background } from "../components/background";
 import { DateTime } from "luxon";
+import { useQuery } from "@tanstack/react-query";
 export const Route = createFileRoute("/$slug")({
   component: RouteComponent,
 });
@@ -12,18 +13,18 @@ export const Route = createFileRoute("/$slug")({
 function RouteComponent() {
   const router = useRouter();
 
-  // const { slug } = Route.useParams();
-  // const { data, isLoading } = useQuery<ResponseArticle>({
-  //   queryKey: ["article", slug],
-  //   queryFn: async () => {
-  //     const response = await fetch(
-  //       `https://www.edgechat.ai/api/v1/articles/${slug}`,
-  //     );
-  //     return response.json();
-  //   },
-  // });
-  const data = MockArticle;
-  const isLoading = false;
+  const { slug } = Route.useParams();
+  const { data, isLoading } = useQuery<ResponseArticle>({
+    queryKey: ["article", slug],
+    queryFn: async () => {
+      const response = await fetch(
+        `https://www.edgechat.ai/api/v1/articles/${slug}`,
+      );
+      return response.json();
+    },
+  });
+  // const data = MockArticle;
+  // const isLoading = false;
   const fullUrl = window.location.href.split("/");
   const replaceUrl = fullUrl.slice(0, -1).join("/");
 
@@ -44,9 +45,12 @@ function RouteComponent() {
         <div className="article-header">
           <div className="position-relative overflow-hidden rounded-5 ">
             <div className="glass d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-center gap-3">
+              <div
+                className="d-flex w-100 align-items-center gap-3"
+                style={{ minWidth: 0 }}
+              >
                 <Button
-                  className="glass rounded-circle p-2"
+                  className="glass rounded-circle p-2 flex-shrink-0"
                   style={{ width: "fit-content" }}
                   onClick={(e) => {
                     e.preventDefault();
@@ -55,17 +59,34 @@ function RouteComponent() {
                 >
                   <ArrowLeft />
                 </Button>
-                <div className="d-flex flex-column lh-1 text-white">
-                  <span className="m-0 ">{data?.title}</span>
-                  <small>
-                    {DateTime.fromSQL(data?.updated).toLocaleString(
-                      DateTime.DATETIME_MED_WITH_WEEKDAY,
-                    )}
-                  </small>
-                </div>
+                {data ? (
+                  <div
+                    className="d-flex flex-column lh-1 text-white flex-grow-1"
+                    style={{ minWidth: 0 }}
+                  >
+                    <span
+                      style={{
+                        marginBottom: "0.15rem",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        width: "100%",
+                      }}
+                    >
+                      {data?.title}
+                    </span>
+                    <small>
+                      {DateTime.fromSQL(data?.updated).toLocaleString(
+                        DateTime.DATETIME_MED_WITH_WEEKDAY,
+                      )}
+                    </small>
+                  </div>
+                ) : (
+                  <SlugHeaderPlaceholder />
+                )}
               </div>
             </div>
-            <Background value={data.slug} />
+            <Background value={slug} />
           </div>
         </div>
       </div>
@@ -76,6 +97,27 @@ function RouteComponent() {
     </>
   );
 }
+
+const SlugHeaderPlaceholder = () => {
+  return (
+    <div
+      className="d-flex flex-column lh-1"
+      style={{ width: "clamp(8rem, 40vw, 20rem)" }}
+    >
+      <Placeholder
+        as="span"
+        className="d-block"
+        style={{ marginBottom: "0.15rem" }}
+        animation="glow"
+      >
+        <Placeholder xs={6} />
+      </Placeholder>
+      <Placeholder as="small" className="d-block" animation="glow">
+        <Placeholder xs={4} />
+      </Placeholder>
+    </div>
+  );
+};
 
 const SlugPlaceholder = () => {
   return (

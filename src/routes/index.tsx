@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRandom } from "../hooks/use-random";
 import { useArticleStore } from "../store/use-article-store";
-import { EmblaCarousel } from "../components/carusel";
+import { EmblaCarousel } from "../components/embla-carusel";
 import { Background } from "../components/background";
 
 export const Route = createFileRoute("/")({
@@ -9,13 +9,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  // const { data } = useQuery<ResponseRandom>({
-  //   queryKey: ["random"],
-  //   queryFn: async () => {
-  //     const response = await fetch("https://www.edgechat.ai/api/v1/random");
-  //     return response.json();
-  //   },
-  // });
   const { isLoading } = useRandom();
   const articles = useArticleStore((state) => state.articles);
   const position = useArticleStore((state) => state.position);

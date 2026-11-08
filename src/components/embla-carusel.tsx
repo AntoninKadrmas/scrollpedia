@@ -59,7 +59,9 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
               <Card className="glass h-100 rounded-0">
                 <CardBody className="d-flex flex-column">
                   <CardTitle>
-                    <small style={{fontSize:15}} className="text-muted">{index}. </small>
+                    <small style={{ fontSize: 15 }} className="text-muted">
+                      {index}.{" "}
+                    </small>
                     {data?.result?.title}
                   </CardTitle>
                   <AsciiAvatar
@@ -89,7 +91,7 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
               </Card>
             </div>
           ))}
-          {isLoading && (
+          {!isLoading && (
             <div className="embla__slide">
               <CardPlaceholder />
             </div>
@@ -105,19 +107,29 @@ const CardPlaceholder = () => {
     <Card className="glass h-100 rounded-0">
       <CardBody>
         <Placeholder as={CardTitle} animation="glow">
-          <Placeholder xs={10} />
+          <Placeholder xs={8} />
         </Placeholder>
+        <Placeholder as={"div"} animation="glow" className="text-center">
+          <Placeholder xs={6} className="mb-3 mt-2 h-40 align-self-center" />
+        </Placeholder>
+        <Placeholder as={CardSubtitle} animation="glow">
+          <Placeholder xs={4} />
+        </Placeholder>
+        <br />
         <Placeholder as={CardText} animation="glow">
           <Placeholder xs={12} />
           <Placeholder xs={8} />
           <Placeholder xs={10} />
           <Placeholder xs={6} />
         </Placeholder>
-        <div className="w-full text-end">
-          <Placeholder as={CardText} animation="glow">
-            <Placeholder xs={3} />
-          </Placeholder>
-        </div>
+        <br />
+        <Placeholder
+          as={Button}
+          className="w-100 bg-secondary border-secondary py-4"
+          animation="glow"
+        >
+          <Placeholder xs={3} />
+        </Placeholder>
       </CardBody>
     </Card>
   );
