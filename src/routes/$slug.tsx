@@ -43,7 +43,7 @@ function RouteComponent() {
     <>
       <div className="sticky-top mb-2">
         <div className="article-header">
-          <div className="position-relative overflow-hidden rounded-5 ">
+          <div className="position-relative overflow-hidden rounded-5">
             <div className="glass d-flex justify-content-between align-items-center">
               <div
                 className="d-flex w-100 align-items-center gap-3"
@@ -121,7 +121,7 @@ const SlugHeaderPlaceholder = () => {
 
 const SlugPlaceholder = () => {
   return (
-    <div>
+    <div className="markdown-content mx-auto">
       <Placeholder as="h1" animation="glow">
         <Placeholder xs={6} />
       </Placeholder>
