@@ -11,6 +11,9 @@ importers:
       '@floating-ui/dom':
         specifier: ^1.8.0
         version: 1.8.0
+      '@marko19907/string-to-color':
+        specifier: ^1.0.2
+        version: 1.0.2
       '@tanstack/markdown':
         specifier: ^1.2.0
         version: 1.2.0(react@19.3.1)
@@ -23,6 +26,9 @@ importers:
       bootstrap:
         specifier: ^5.3.8
         version: 5.3.8(@popperjs/core@2.11.8)
+      embla-carousel:
+        specifier: ^8.6.0
+        version: 8.6.0
       embla-carousel-react:
         specifier: ^8.6.0
         version: 8.6.0(react@19.3.1)
@@ -280,6 +286,9 @@ packages:
 
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
+
+  '@marko19907/string-to-color@1.0.2':
+    resolution: {integrity: sha512-kADXIfypDWoCnqvqAjvgTm7curpHoigUpPVXKQY5fP2hUFfX72xx5H7ga4T7CwdBmIbYrbvU4zU/Al2NWPD+qQ==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -903,6 +912,9 @@ packages:
     peerDependenciesMeta:
       jiti:
         optional: true
+
+  esm-seedrandom@3.0.5-esm.2:
+    resolution: {integrity: sha512-K6/g/blFdwYWCvBJwbYQGDTlvP3ElnsXwIvbwLjwcP7grVtcqCC6VOPe47/z3gSfwCLkcWGeB8CffwMNYr35HQ==}
 
   espree@11.2.0:
     resolution: {integrity: sha512-7p3DrVEIopW1B1avAGLuCSh1jubc01H2JHc8B4qqGblmg5gI9yumBgACjWo4JlIc04ufug4xJ3SQI8HkS/Rgzw==}
@@ -1850,6 +1862,10 @@ snapshots:
 
   '@keyv/serialize@1.1.1': {}
 
+  '@marko19907/string-to-color@1.0.2':
+    dependencies:
+      esm-seedrandom: 3.0.5-esm.2
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -2437,6 +2453,8 @@ snapshots:
       jiti: 2.7.0
     transitivePeerDependencies:
       - supports-color
+
+  esm-seedrandom@3.0.5-esm.2: {}
 
   espree@11.2.0:
     dependencies:
