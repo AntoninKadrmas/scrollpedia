@@ -27,3 +27,9 @@
   min-height: 0;
   padding-top: var(--slide-spacing);
 }
+
+.embla__button--disabled,
+.embla__button--disabled:hover {
+  cursor: default;
+  opacity: 0.5;
+}

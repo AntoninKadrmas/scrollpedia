@@ -15,6 +15,11 @@ import {
 } from "react-bootstrap";
 import { useArticleStore } from "@/store/use-article-store";
 import { AsciiAvatar } from "@/components/ascii/ascii-avatar";
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons,
+} from "./embla-carusel-arrows";
 type EmblaCarouselProps = {
   slides: ResponseRandom[];
   position: number;
@@ -50,8 +55,15 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
     emblaApi.scrollTo(props.position, true);
   }, [emblaApi, props.position]);
 
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick,
+  } = usePrevNextButtons(emblaApi);
+
   return (
-    <div {...props} className="embla">
+    <div {...props} className="embla d-flex">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((data, index) => (
@@ -97,6 +109,10 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
             </div>
           )}
         </div>
+      </div>
+      <div className="embla__arrows d-none d-md-flex flex-column ms-2 gap-2 h-100 justify-content-end pb-2">
+        <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+        <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
     </div>
   );
