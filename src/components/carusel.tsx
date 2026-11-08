@@ -55,26 +55,33 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((data, index) => (
-            <div className="embla__slide" key={index}>
+            <div className="embla__slide" key={data.result.id}>
               <Card className="glass h-100 rounded-0">
-                <CardBody>
-                  <CardTitle>{data?.result?.title}</CardTitle>
+                <CardBody className="d-flex flex-column">
+                  <CardTitle>
+                    <small style={{fontSize:15}} className="text-muted">{index}. </small>
+                    {data?.result?.title}
+                  </CardTitle>
                   <AsciiAvatar
                     name={data?.result?.slug}
                     colored={false}
                     width="auto"
                     height={10}
-                    className="w-100 align-self-center mb-3 mt-2 text-center"
+                    className="w-50 align-self-center mb-3 mt-2 text-center"
                   />
                   <CardSubtitle>{data?.result?.topic}</CardSubtitle>
                   <br />
                   <CardText>{data?.result?.excerpt}</CardText>
+                  <br />
                   <Link
                     to="/$slug"
                     params={{ slug: data?.result?.slug }}
                     className="text-decoration-none"
                   >
-                    <Button variant="secondary" className="w-100 mt-auto">
+                    <Button
+                      variant="secondary"
+                      className="w-100 mt-auto glass py-4"
+                    >
                       Read more...
                     </Button>
                   </Link>
