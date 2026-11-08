@@ -14,7 +14,7 @@ import { Link } from "@tanstack/react-router";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { ResponseTopic } from "@/types/topic";
 import { getPrefix } from "@/lib/prefix";
-import { Children, ResponseSubtopic } from "@/types/subtopic";
+import { ResponseSubtopic } from "@/types/subtopic";
 
 type SearchContentProps = {
   className?: string;
