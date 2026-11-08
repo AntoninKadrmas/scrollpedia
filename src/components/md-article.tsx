@@ -5,7 +5,6 @@ import Table from "react-bootstrap/Table";
 import "./md-article.css";
 
 type articleProps = {
-  className?: string;
   markdown: string;
 } & HTMLAttributes<HTMLOrSVGElement>;
 

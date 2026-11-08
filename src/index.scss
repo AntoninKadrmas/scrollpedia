@@ -7,18 +7,38 @@ body{
   color-scheme: dark;
 }
 
-.glass:hover {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.2);
-}
 
 .glass {
-  background: rgba(255,255,255,0.12);
+  --bs-btn-bg: rgba(255, 255, 255, 0.12);
+  --bs-btn-hover-bg: rgba(255, 255, 255, 0.12);
+  --bs-btn-active-bg: rgba(255, 255, 255, 0.12);
+
+  --bs-btn-border-color: rgba(255, 255, 255, 0.2);
+  --bs-btn-hover-border-color: rgba(255, 255, 255, 0.2);
+  --bs-btn-active-border-color: rgba(255, 255, 255, 0.2);
+
+  --bs-btn-focus-shadow-rgb: 0, 0, 0;
+
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.glass:hover {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.glass:active,
+.glass.active,
+.glass:focus,
+.glass:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
