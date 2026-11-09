@@ -1,21 +1,25 @@
 import { useFavorite } from "@/store/use-favorite";
 import { ResultFavorite } from "@/types/random";
 import { cn } from "cn";
-import { AArrowDown, Bookmark } from "lucide-react";
+import { Bookmark } from "lucide-react";
 import { FC, HTMLAttributes } from "react";
 import { Button, Placeholder } from "react-bootstrap";
 
 type FavoriteButtonProps = {
   className?: string;
+  classBookmark?: string;
   article?: ResultFavorite;
   slug: string;
   rounded?: boolean;
+  onClick?: () => void;
 } & HTMLAttributes<HTMLOrSVGElement>;
 
 export const FavoriteButton: FC<FavoriteButtonProps> = ({
   article,
   rounded,
+  classBookmark,
   slug,
+  onClick,
   ...props
 }) => {
   const toggleFavorite = useFavorite((state) => state.toggleFavorite);
@@ -24,14 +28,17 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
   return (
     <Button
       {...props}
-      onClick={() => toggleFavorite(article)}
+      onClick={() => (onClick ? onClick() : toggleFavorite(article))}
       className={cn(
         rounded ? "rounded-circle" : "rounded-5",
         "glass p-2",
         props.className,
       )}
     >
-      <Bookmark fill={isFavorite ? "currentColor" : "none"} />
+      <Bookmark
+        fill={isFavorite ? "currentColor" : "none"}
+        className={classBookmark}
+      />
     </Button>
   );
 };

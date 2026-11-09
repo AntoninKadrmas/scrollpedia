@@ -16,6 +16,7 @@ import { ResponseTopic } from "@/types/topic";
 import { getPrefix } from "@/lib/prefix";
 import { ResponseSubtopic } from "@/types/subtopic";
 import { ErrorRefetch } from "./error-refetch";
+import { FavoriteButton } from "./favorite-button";
 
 type SearchContentProps = {
   className?: string;
@@ -195,12 +196,28 @@ export const SearchContent: FC<SearchContentProps> = ({
                         <CardText className="line-clamp-2">
                           {article.snippet}
                         </CardText>
-                        <Link
-                          to="/$slug"
-                          params={{ slug: getPrefix(article.slug, "ARTICLE") }}
-                        >
-                          <Button className="w-100 glass">Read more...</Button>
-                        </Link>
+                        <div className="d-flex align-items-stretch gap-2">
+                          <Link
+                            to="/$slug"
+                            style={{ flex: 1 }}
+                            params={{
+                              slug: getPrefix(article.slug, "ARTICLE"),
+                            }}
+                          >
+                            <Button className="w-100 glass">
+                              Read more...
+                            </Button>
+                          </Link>
+                          <FavoriteButton
+                            article={article}
+                            style={{
+                              height: 38,
+                              width: 38,
+                            }}
+                            className="glass d-flex align-items-center justify-content-center"
+                            slug={article?.slug}
+                          />
+                        </div>
                       </CardBody>
                     </Card>
                   )}
@@ -247,9 +264,19 @@ const SearchContentPlaceholder: FC<HTMLAttributes<HTMLOrSVGElement>> = ({
           <Placeholder xs={12} />
           <Placeholder xs={8} />
         </Placeholder>
-        <Placeholder as={Button} animation="glow" className="w-100 glass">
-          <Placeholder xs={6} />
-        </Placeholder>
+        <div className="d-flex gap-2">
+          <Placeholder as={Button} animation="glow" className="w-100 glass">
+            <Placeholder xs={6} />
+          </Placeholder>
+          <Placeholder
+            as={Button}
+            style={{ width: 38 }}
+            animation="glow"
+            className="w-fit glass d-flex align-items-center justify-content-center"
+          >
+            <Placeholder xs={12} />
+          </Placeholder>
+        </div>
       </CardBody>
     </Card>
   );
