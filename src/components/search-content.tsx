@@ -15,6 +15,7 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { ResponseTopic } from "@/types/topic";
 import { getPrefix } from "@/lib/prefix";
 import { ResponseSubtopic } from "@/types/subtopic";
+import { ErrorRefetch } from "./error-refetch";
 
 type SearchContentProps = {
   className?: string;
@@ -31,13 +32,18 @@ export const SearchContent: FC<SearchContentProps> = ({
   onClose,
   ...props
 }) => {
-  const { data: topicData } = useQuery<ResponseTopic>({
+  const {
+    data: topicData,
+    isLoading: isLoadingTopic,
+    isError,
+    refetch,
+  } = useQuery<ResponseTopic>({
     queryKey: ["topic"],
     queryFn: async () => {
       const response = await fetch(`https://www.edgechat.ai/api/v1/topics`);
       return response.json();
     },
-    enabled: categoryId == null,
+    enabled: !categoryId,
   });
 
   const { data: subtopicData } = useQuery<ResponseSubtopic>({
@@ -92,7 +98,14 @@ export const SearchContent: FC<SearchContentProps> = ({
         {!isLoading && data?.pages?.[0]?.results?.length === 0 && (
           <h2 className="text-center text-white mt-5">No data found.</h2>
         )}
-        {!isLoading && !data && (
+        {isError && (
+          <ErrorRefetch
+            className="h-fit mt-5"
+            refetch={refetch}
+            disabled={isFetching}
+          />
+        )}
+        {!isError && !isLoading && !data && (
           <div
             className="overflow-auto px-2"
             style={{ paddingBottom: "100px" }}
@@ -102,24 +115,41 @@ export const SearchContent: FC<SearchContentProps> = ({
                 ? `Choose a subtopic of (${subtopicData?.label}):`
                 : "Choose a topic:"}
             </h2>
-            <div className="d-flex flex-column justify-content-center align-items-center gap-3 mt-3">
-              {(categoryId ? subtopicData?.children : topicData?.topics)?.map(
-                (topic) => (
-                  <Link
-                    to="/$slug"
-                    params={{ slug: getPrefix(topic.id, "TOPIC") }}
-                    onClick={() => onClose()}
-                    key={topic.id}
-                  >
-                    <Button className="glass">{topic.label}</Button>
-                  </Link>
-                ),
-              )}
-              {(categoryId ? subtopicData?.children : topicData?.topics)
-                ?.length === 0 && (
-                <p className="text-muted">No topics available.</p>
-              )}
-            </div>
+            {isLoadingTopic ? (
+              <div className="d-flex flex-column justify-content-center align-items-center gap-3 mt-3">
+                <Placeholder as={Button} animation="glow" className="glass">
+                  <Placeholder style={{ width: "10rem" }} />
+                </Placeholder>
+                <Placeholder as={Button} animation="glow" className="glass">
+                  <Placeholder style={{ width: "8rem" }} />
+                </Placeholder>
+                <Placeholder as={Button} animation="glow" className="glass">
+                  <Placeholder style={{ width: "9rem" }} />
+                </Placeholder>
+                <Placeholder as={Button} animation="glow" className="glass">
+                  <Placeholder style={{ width: "6rem" }} />
+                </Placeholder>
+              </div>
+            ) : (
+              <div className="d-flex flex-column justify-content-center align-items-center gap-3 mt-3">
+                {(categoryId ? subtopicData?.children : topicData?.topics)?.map(
+                  (topic) => (
+                    <Link
+                      to="/$slug"
+                      params={{ slug: getPrefix(topic.id, "TOPIC") }}
+                      onClick={() => onClose()}
+                      key={topic.id}
+                    >
+                      <Button className="glass">{topic.label}</Button>
+                    </Link>
+                  ),
+                )}
+                {(categoryId ? subtopicData?.children : topicData?.topics)
+                  ?.length === 0 && (
+                  <p className="text-muted">No topics available.</p>
+                )}
+              </div>
+            )}
           </div>
         )}
         {!isLoading && slug && (

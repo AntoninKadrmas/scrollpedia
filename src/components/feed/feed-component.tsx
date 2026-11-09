@@ -2,10 +2,11 @@ import { useRandom } from "@/hooks/use-random";
 import { Background } from "@/components/background";
 import { SearchButton } from "@/components/search-button";
 import { useArticleStore } from "@/store/use-article-store";
-import { EmblaCarousel } from "../embla-carusel";
+import { EmblaCarousel } from "@/components/feed/embla-carusel";
 import { useQuery } from "@tanstack/react-query";
 import { ResponseSubtopic } from "@/types/subtopic";
 import { useEffect } from "react";
+import { ErrorRefetch } from "../error-refetch";
 
 export const FeedComponent = ({
   categoryId,
@@ -22,7 +23,7 @@ export const FeedComponent = ({
     },
     enabled: !!categoryId,
   });
-  const { isLoading, refetch } = useRandom({ categoryId });
+  const { isLoading, refetch, isError } = useRandom({ categoryId });
   const articles = useArticleStore((state) => state.articles);
   const position = useArticleStore((state) => state.position);
   const category = useArticleStore((state) => state.category);
@@ -38,15 +39,26 @@ export const FeedComponent = ({
     }
   }, [categoryId, category]);
 
+  const slug = data?.result?.slug ?? "some random";
+
   return (
     <div className="position-relative overflow-hidden vw-100 vh-100 d-flex justify-content-center align-items-center flex-column">
-      <EmblaCarousel
-        slides={articles}
-        position={position}
-        isLoading={isLoading}
-        topicPath={topicData?.path}
-      />
-      <Background value={data?.result?.slug} />
+      {isError && (
+        <ErrorRefetch
+          className="vh-100"
+          refetch={refetch}
+          disabled={isLoading}
+        />
+      )}
+      {!isError && (
+        <EmblaCarousel
+          slides={articles}
+          position={position}
+          isLoading={isLoading}
+          topicPath={topicData?.path}
+        />
+      )}
+      <Background value={slug} />
       <SearchButton
         categoryId={categoryId}
         subcategories={topicData?.children ?? []}

@@ -1,14 +1,23 @@
 import { useRouter } from "@tanstack/react-router";
 import { ResponseArticle } from "@/types/article";
-import { MdArticle } from "@/components/md-article";
+import { MdArticle } from "@/components/article/md-article";
 import { ArrowLeft } from "lucide-react";
 import { Button, Placeholder } from "react-bootstrap";
 import { Background } from "@/components/background";
 import { useQuery } from "@tanstack/react-query";
 import { PREFIX } from "@/lib/prefix";
+import { FavoriteButton } from "../favorite-button";
+import { ErrorRefetch } from "../error-refetch";
+import { ResultFavorite } from "@/types/random";
 
 export const ArticleComponent = ({ slug }: { slug: string }) => {
-  const { data: article, isLoading } = useQuery<ResponseArticle>({
+  const {
+    data: article,
+    isLoading,
+    isError,
+    refetch,
+    error,
+  } = useQuery<ResponseArticle>({
     queryKey: ["article", slug],
     queryFn: async () => {
       const response = await fetch(
@@ -17,7 +26,6 @@ export const ArticleComponent = ({ slug }: { slug: string }) => {
       return response.json();
     },
   });
-  const router = useRouter();
   const fullUrl = window.location.href.split("/");
   const replaceUrl = `${fullUrl.slice(0, -1).join("/")}/${PREFIX["ARTICLE"]}`;
 
@@ -35,43 +43,75 @@ export const ArticleComponent = ({ slug }: { slug: string }) => {
     <>
       <div className="sticky-top mb-2">
         <div className="article-header">
-          <div className="position-relative overflow-hidden rounded-5">
-            <div className="glass d-flex justify-content-between align-items-center">
-              <div
-                className="d-flex w-100 align-items-center gap-2"
-                style={{ minWidth: 0 }}
-              >
-                <Button
-                  className="glass rounded-circle p-2 flex-shrink-0"
-                  style={{ width: "fit-content" }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.history.back();
-                  }}
-                >
-                  <ArrowLeft />
-                </Button>
-                {article ? (
-                  <div
-                    className="d-flex flex-column lh-1 text-white flex-grow-1"
-                    style={{ minWidth: 0 }}
-                  >
-                    <span className="line-clamp">{article?.title}</span>
-                  </div>
-                ) : (
-                  <SlugHeaderPlaceholder />
-                )}
-              </div>
-            </div>
-            <Background value={slug} />
-          </div>
+          <ArticleHeaderPanel article={article} slug={slug} />
         </div>
       </div>
-      <div className="article-page">
-        {isLoading && <SlugPlaceholder />}
-        {!isLoading && <MdArticle markdown={result} />}
-      </div>
+      {isError && (
+        <ErrorRefetch
+          className="h-fit mt-5"
+          refetch={refetch}
+          disabled={isLoading}
+        />
+      )}
+      {!isError && (
+        <div className="article-page">
+          {isLoading && <SlugPlaceholder />}
+          {!isLoading && <MdArticle markdown={result} />}
+        </div>
+      )}
     </>
+  );
+};
+
+const ArticleHeaderPanel = ({
+  article,
+  slug,
+}: {
+  article?: ResponseArticle;
+  slug: string;
+}) => {
+  const router = useRouter();
+
+  return (
+    <div className="position-relative overflow-hidden rounded-5">
+      <div className="glass d-flex justify-content-between align-items-center">
+        <div
+          className="d-flex w-100 align-items-center justify-content-between gap-2"
+          style={{ minWidth: 0 }}
+        >
+          <div className="d-flex gap-2 flex-row align-items-center">
+            <Button
+              className="glass rounded-circle p-2 flex-shrink-0"
+              style={{ width: "fit-content" }}
+              onClick={(e) => {
+                e.preventDefault();
+                router.history.back();
+              }}
+            >
+              <ArrowLeft />
+            </Button>
+            {article ? (
+              <div
+                className="d-flex flex-column lh-1 text-white flex-grow-1"
+                style={{ minWidth: 0 }}
+              >
+                <span className="line-clamp">{article?.title}</span>
+              </div>
+            ) : (
+              <SlugHeaderPlaceholder />
+            )}
+          </div>
+          <FavoriteButton
+            article={{
+              ...(article as ResultFavorite),
+            }}
+            slug={slug}
+            rounded
+          />
+        </div>
+      </div>
+      <Background value={slug} />
+    </div>
   );
 };
 
@@ -89,9 +129,6 @@ const SlugHeaderPlaceholder = () => {
       >
         <Placeholder xs={6} />
       </Placeholder>
-      {/* <Placeholder as="small" className="d-block" animation="glow">
-        <Placeholder xs={4} />
-      </Placeholder> */}
     </div>
   );
 };
