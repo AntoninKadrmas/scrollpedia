@@ -33,3 +33,17 @@
   cursor: default;
   opacity: 0.5;
 }
+
+.breadcrumb{
+  margin: 0;
+  padding: 0.1rem 0;
+  ol {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    line-height: 1 !important;
+    a{
+      color: var(--bs-info) !important;
+    }
+  }
+}

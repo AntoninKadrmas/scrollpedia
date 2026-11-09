@@ -29,6 +29,7 @@ import { Path } from "@/types/subtopic";
 import { EmblaCarouselOnboard } from "./embla-carusel-onboard";
 import { FavoriteButton } from "../favorite-button";
 import { EmblaCarouselLast } from "./embla-carusel-last";
+import { cn } from "cn";
 type EmblaCarouselProps = {
   slides: ResponseRandom[];
   position: number;
@@ -121,8 +122,8 @@ const CaruselCard = ({
     <div className="embla__slide" key={data.result.id}>
       <Card className="glass h-100 rounded-0">
         {topicPath && topicPath.length > 0 && (
-          <CardHeader className="d-flex">
-            <Breadcrumb>
+          <CardHeader>
+            <Breadcrumb className="d-flex flex-wrap align-items-center w-100 breadcrumb">
               <BreadcrumbItem
                 key="home"
                 linkAs={Link}
@@ -136,7 +137,7 @@ const CaruselCard = ({
                   key={path.id}
                   linkAs={Link}
                   linkProps={{ to: `/${getPrefix(path.id, "TOPIC")}` }}
-                  className="text-muted me-2"
+                  className={cn("text-muted me-2 lh-1")}
                   active={index === topicPath.length - 1}
                 >
                   {path.label}
