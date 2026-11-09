@@ -5,7 +5,6 @@ import { Button } from "react-bootstrap";
 import "./search-button.css";
 import { SearchContent } from "./search-content";
 import { Children } from "@/types/subtopic";
-import { useFavorite } from "@/store/use-favorite";
 import { FavoriteContent } from "./favortie-content";
 
 type SearchButtonProps = {
