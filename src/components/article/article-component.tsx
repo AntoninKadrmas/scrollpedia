@@ -16,7 +16,6 @@ export const ArticleComponent = ({ slug }: { slug: string }) => {
     isLoading,
     isError,
     refetch,
-    error,
   } = useQuery<ResponseArticle>({
     queryKey: ["article", slug],
     queryFn: async () => {
