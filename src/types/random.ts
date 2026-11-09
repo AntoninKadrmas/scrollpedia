@@ -16,6 +16,13 @@ export interface Result {
   api_url: string;
 }
 
+export interface ResultFavorite {
+  id: string;
+  slug: string;
+  title: string;
+  snippet: string;
+}
+
 export interface License {
   name: string;
   url: string;
