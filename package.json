@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://antoninkadrmas.github.io/uef-final-project/",
+  "homepage": "https://antoninkadrmas.github.io/scrollpedia/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist --nojekyll",
