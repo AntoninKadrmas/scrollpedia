@@ -17,8 +17,10 @@ import { Link } from "@tanstack/react-router";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { getPrefix } from "@/lib/prefix";
 import { FavoriteButton } from "@/components/favorite/favorite-button";
+import { useSearchFavorite } from "@/store/use-search-favorite";
 
 type SearchContentVirtualizerType = {
+  scrollKey: string;
   data: InfiniteData<ResponseSearch, unknown> | undefined;
   fetchNextPage: (
     options?: FetchNextPageOptions,
@@ -34,6 +36,7 @@ type SearchContentVirtualizerType = {
 const ARTICLE_HEIGHT = 166;
 
 export const SearchContentVirtualizer: FC<SearchContentVirtualizerType> = ({
+  scrollKey,
   data,
   fetchNextPage,
   hasNextPage,
@@ -41,9 +44,11 @@ export const SearchContentVirtualizer: FC<SearchContentVirtualizerType> = ({
   isFetchingNextPage,
   parentRef,
 }) => {
+  const scrollOffsets = useSearchFavorite((state) => state.scrollOffsets);
   const allRows = data ? data.pages.flatMap((d) => d.results) : [];
 
   const rowVirtualizer = useVirtualizer({
+    initialOffset: () => scrollOffsets[scrollKey] ?? 0,
     count: hasNextPage ? allRows.length + 1 : allRows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: (index) => (index === allRows.length ? 74 : ARTICLE_HEIGHT),

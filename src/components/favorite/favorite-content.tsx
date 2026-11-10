@@ -18,6 +18,7 @@ import { Background } from "@/components/background";
 import { Bookmark, BookmarkOff } from "lucide-react";
 import { FavoriteButton } from "./favorite-button";
 import { ResultFavorite } from "@/types/random";
+import { useSearchFavorite } from "@/store/use-search-favorite";
 
 type FavoriteContentProps = {
   className?: string;
@@ -28,10 +29,13 @@ const ARTICLE_HEIGHT = 166;
 export const FavoriteContent: FC<FavoriteContentProps> = ({ ...props }) => {
   const favorites = useFavorite((state) => state.favorites);
   const toggleFavorite = useFavorite((state) => state.toggleFavorite);
+  const scrollOffsets = useSearchFavorite((state) => state.scrollOffsets);
+  const setScrollOffset = useSearchFavorite((state) => state.setScrollOffset);
 
   const parentRef = useRef<HTMLDivElement>(null);
 
   const rowVirtualizer = useVirtualizer({
+    initialOffset: () => scrollOffsets.favorites ?? 0,
     count: favorites.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => ARTICLE_HEIGHT,
@@ -52,6 +56,9 @@ export const FavoriteContent: FC<FavoriteContentProps> = ({ ...props }) => {
     >
       <div
         ref={parentRef}
+        onScroll={(event) => {
+          setScrollOffset("favorites", event.currentTarget.scrollTop);
+        }}
         className="d-flex flex-column overflow-auto h-100"
         style={{
           scrollbarWidth: "none",
