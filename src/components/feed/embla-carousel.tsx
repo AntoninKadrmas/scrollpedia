@@ -8,15 +8,15 @@ import {
   NextButton,
   PrevButton,
   usePrevNextButtons,
-} from "./embla-carusel-arrows";
+} from "./embla-carousel-arrows";
 import { useOnboard } from "@/store/use-onboard";
 import { Path } from "@/types/subtopic";
-import { EmblaCarouselOnboard } from "./embla-carusel-onboard";
-import { EmblaCarouselLast } from "./embla-carusel-last";
+import { EmblaCarouselOnboard } from "./embla-carousel-onboard";
+import { EmblaCarouselLast } from "./embla-carousel-last";
 import {
-  EmblaCaruselCard,
-  EmblaCaruselCardPlaceholder,
-} from "./embla-carusel-card";
+  EmblacarouselCard,
+  EmblacarouselCardPlaceholder,
+} from "./embla-carousel-card";
 
 type EmblaCarouselProps = {
   slides: ResponseRandom[];
@@ -74,14 +74,14 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
         <div className="embla__container">
           {!hasOnboard && <EmblaCarouselOnboard />}
           {slides.map((data, index) => (
-            <EmblaCaruselCard
+            <EmblacarouselCard
               data={data}
               index={index}
               topicPath={topicPath}
               key={data.result.id}
             />
           ))}
-          {isLoading && <EmblaCaruselCardPlaceholder />}
+          {isLoading && <EmblacarouselCardPlaceholder />}
           <EmblaCarouselLast />
         </div>
       </div>

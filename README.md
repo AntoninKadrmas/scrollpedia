@@ -13,3 +13,5 @@ serves generated assets whose names start with `_`, including the `_slug` route 
 [background gradient](https://backseasy.com/)
 
 [ascii component](https://asciicn.sumak.dev/docs/components)
+
+[carousel component](https://www.embla-carousel.com/)

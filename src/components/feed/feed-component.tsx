@@ -2,7 +2,7 @@ import { useRandom } from "@/hooks/use-random";
 import { Background } from "@/components/background";
 import { SearchButton } from "@/components/search/search-button";
 import { useArticleStore } from "@/store/use-article-store";
-import { EmblaCarousel } from "@/components/feed/embla-carusel";
+import { EmblaCarousel } from "@/components/feed/embla-carousel";
 import { useQuery } from "@tanstack/react-query";
 import { ResponseSubtopic } from "@/types/subtopic";
 import { useEffect } from "react";
@@ -58,9 +58,7 @@ export const FeedComponent = ({
         />
       )}
       <Background value={slug} />
-      <SearchButton
-        categoryId={categoryId}
-      />
+      <SearchButton categoryId={categoryId} />
     </div>
   );
 };

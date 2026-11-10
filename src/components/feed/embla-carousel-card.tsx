@@ -18,13 +18,13 @@ import { FavoriteButton } from "@/components/favorite/favorite-button";
 import { ResponseRandom, ResultFavorite } from "@/types/random";
 import { Path } from "@/types/article";
 
-type EmblaCaruselCard = {
+type EmblacarouselCard = {
   data: ResponseRandom;
   index: number;
   topicPath: Path[];
 };
 
-export const EmblaCaruselCard: FC<EmblaCaruselCard> = ({
+export const EmblacarouselCard: FC<EmblacarouselCard> = ({
   data,
   index,
   topicPath,
@@ -101,7 +101,7 @@ export const EmblaCaruselCard: FC<EmblaCaruselCard> = ({
   );
 };
 
-export const EmblaCaruselCardPlaceholder = () => {
+export const EmblacarouselCardPlaceholder = () => {
   return (
     <div className="embla__slide w-100">
       <Card className="glass h-100 rounded-0 w-100">
