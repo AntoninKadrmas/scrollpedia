@@ -1,4 +1,5 @@
 import { Markdown } from "@tanstack/markdown/react";
+import { autolinksExtension } from "@tanstack/markdown/extensions/autolinks";
 import type { MarkdownExtension } from "@tanstack/markdown";
 import { FC, HTMLAttributes } from "react";
 import Table from "react-bootstrap/Table";
@@ -37,7 +38,7 @@ export const MdArticle: FC<articleProps> = ({ markdown, ...props }) => {
       className={"markdown-content mx-auto " + (props.className ?? "")}
     >
       <Markdown
-        extensions={[superscriptExtension]}
+        extensions={[superscriptExtension, autolinksExtension()]}
         components={{
           a: ({ href, children, ...linkProps }) => {
             let isExternal = false;
