@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ResponseSubtopic } from "@/types/subtopic";
 import { useEffect } from "react";
 import { ErrorRefetch } from "../error-refetch";
-import { API_PATH } from "@/main";
+import { API_PATH } from "@/lib/api";
 
 export const FeedComponent = ({
   categoryId,
@@ -60,7 +60,6 @@ export const FeedComponent = ({
       <Background value={slug} />
       <SearchButton
         categoryId={categoryId}
-        subcategories={topicData?.children ?? []}
       />
     </div>
   );

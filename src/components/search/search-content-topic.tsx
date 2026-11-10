@@ -6,7 +6,7 @@ import { ResponseTopic } from "@/types/topic";
 import { getPrefix } from "@/lib/prefix";
 import { ResponseSubtopic } from "@/types/subtopic";
 import { ErrorRefetch } from "@/components/error-refetch";
-import { API_PATH } from "@/main";
+import { API_PATH } from "@/lib/api";
 
 type SearchContentTopicType = {
   categoryId: string | null;

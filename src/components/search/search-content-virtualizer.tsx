@@ -4,7 +4,7 @@ import {
   InfiniteData,
   InfiniteQueryObserverResult,
 } from "@tanstack/react-query";
-import { FC, HTMLAttributes, useRef } from "react";
+import { FC, HTMLAttributes, RefObject } from "react";
 import {
   Button,
   Card,
@@ -28,6 +28,7 @@ type SearchContentVirtualizerType = {
   hasNextPage: boolean;
   isFetching: boolean;
   isFetchingNextPage: boolean;
+  parentRef: RefObject<HTMLDivElement | null>;
 };
 
 const ARTICLE_HEIGHT = 166;
@@ -38,9 +39,8 @@ export const SearchContentVirtualizer: FC<SearchContentVirtualizerType> = ({
   hasNextPage,
   isFetching,
   isFetchingNextPage,
+  parentRef,
 }) => {
-  const parentRef = useRef<HTMLDivElement>(null);
-
   const allRows = data ? data.pages.flatMap((d) => d.results) : [];
 
   const rowVirtualizer = useVirtualizer({

@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useArticleStore } from "../store/use-article-store";
 import type { ResponseRandom } from "../types/random";
-import { API_PATH } from "@/main";
+import { API_PATH } from "@/lib/api";
 
 const FETCH_AMOUNT = 5;
 const REFETCH_BEFORE = 2;

@@ -2,7 +2,8 @@ import { ResponseSearch } from "@/types/search";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { FC, HTMLAttributes, useRef } from "react";
 import { Background } from "@/components/background";
-import { API_PATH } from "@/main";
+import { API_PATH } from "@/lib/api";
+import { ErrorRefetch } from "@/components/error-refetch";
 import { SearchContentTopic } from "./search-content-topic";
 import {
   SearchContentPlaceholder,
@@ -22,13 +23,18 @@ export const SearchContent: FC<SearchContentProps> = ({
   onClose,
   ...props
 }) => {
-  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ["search", slug],
+  const {
+    data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage,
+    isError, refetch,
+  } = useInfiniteQuery({
+      queryKey: ["search", slug, categoryId],
       queryFn: async ({ pageParam = 1 }) => {
         const response = await fetch(
-          `${API_PATH}api/v1/search?q=${slug}&page=${pageParam}${categoryId ? `&topic=${categoryId}` : ""}`,
+          `${API_PATH}api/v1/search?q=${encodeURIComponent(slug)}&page=${pageParam}${categoryId ? `&topic=${encodeURIComponent(categoryId)}` : ""}`,
         );
+        if (!response.ok) {
+          throw new Error(`Search failed (${response.status}).`);
+        }
         return response.json();
       },
       initialPageParam: 1,
@@ -58,11 +64,20 @@ export const SearchContent: FC<SearchContentProps> = ({
         {!isLoading && data?.pages?.[0]?.results?.length === 0 && (
           <h2 className="text-center text-white mt-5">No data found.</h2>
         )}
-        {!isLoading && !data && (
+        {isError && slug && (
+          <ErrorRefetch
+            refetch={refetch}
+            disabled={isFetching}
+            className="h-fit mt-5"
+          />
+        )}
+        {!slug && (
           <SearchContentTopic categoryId={categoryId} onClose={onClose} />
         )}
-        {!isLoading && slug && (
+        {slug && (
           <SearchContentVirtualizer
+            key={`${categoryId}:${slug}`}
+            parentRef={parentRef}
             data={data}
             fetchNextPage={fetchNextPage}
             hasNextPage={hasNextPage}

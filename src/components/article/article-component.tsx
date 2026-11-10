@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PREFIX } from "@/lib/prefix";
 import { ErrorRefetch } from "@/components/error-refetch";
 import { ArticleHeader } from "./article-header";
-import { API_PATH } from "@/main";
+import { API_PATH } from "@/lib/api";
 
 export const ArticleComponent = ({ slug }: { slug: string }) => {
   const {

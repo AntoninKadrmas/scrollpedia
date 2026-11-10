@@ -4,17 +4,14 @@ import { FC, FormEvent, HTMLAttributes, useState } from "react";
 import { Button } from "react-bootstrap";
 import "./search-button.css";
 import { SearchContent } from "./search-content";
-import { Children } from "@/types/subtopic";
 import { FavoriteContent } from "@/components/favorite/favorite-content";
 
 type SearchButtonProps = {
   className?: string;
-  subcategories?: Children[];
   categoryId: string | null;
 } & HTMLAttributes<HTMLOrSVGElement>;
 
 export const SearchButton: FC<SearchButtonProps> = ({
-  subcategories = [],
   categoryId,
   ...props
 }) => {
