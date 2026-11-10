@@ -1,12 +1,13 @@
 import { useRandom } from "@/hooks/use-random";
 import { Background } from "@/components/background";
-import { SearchButton } from "@/components/search-button";
+import { SearchButton } from "@/components/search/search-button";
 import { useArticleStore } from "@/store/use-article-store";
 import { EmblaCarousel } from "@/components/feed/embla-carusel";
 import { useQuery } from "@tanstack/react-query";
 import { ResponseSubtopic } from "@/types/subtopic";
 import { useEffect } from "react";
 import { ErrorRefetch } from "../error-refetch";
+import { API_PATH } from "@/main";
 
 export const FeedComponent = ({
   categoryId,
@@ -16,9 +17,7 @@ export const FeedComponent = ({
   const { data: topicData } = useQuery<ResponseSubtopic>({
     queryKey: ["topic", categoryId],
     queryFn: async () => {
-      const response = await fetch(
-        `https://www.edgechat.ai/api/v1/topics/${categoryId}`,
-      );
+      const response = await fetch(`${API_PATH}api/v1/topics/${categoryId}`);
       return response.json();
     },
     enabled: !!categoryId,

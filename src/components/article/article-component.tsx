@@ -1,14 +1,11 @@
-import { useRouter } from "@tanstack/react-router";
 import { ResponseArticle } from "@/types/article";
 import { MdArticle } from "@/components/article/md-article";
-import { ArrowLeft } from "lucide-react";
-import { Button, Placeholder } from "react-bootstrap";
-import { Background } from "@/components/background";
+import { Placeholder } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
 import { PREFIX } from "@/lib/prefix";
-import { FavoriteButton } from "../favorite-button";
-import { ErrorRefetch } from "../error-refetch";
-import { ResultFavorite } from "@/types/random";
+import { ErrorRefetch } from "@/components/error-refetch";
+import { ArticleHeader } from "./article-header";
+import { API_PATH } from "@/main";
 
 export const ArticleComponent = ({ slug }: { slug: string }) => {
   const {
@@ -19,30 +16,25 @@ export const ArticleComponent = ({ slug }: { slug: string }) => {
   } = useQuery<ResponseArticle>({
     queryKey: ["article", slug],
     queryFn: async () => {
-      const response = await fetch(
-        `https://www.edgechat.ai/api/v1/articles/${slug}`,
-      );
+      const response = await fetch(`${API_PATH}api/v1/articles/${slug}`);
       return response.json();
     },
   });
   const fullUrl = window.location.href.split("/");
   const replaceUrl = `${fullUrl.slice(0, -1).join("/")}/${PREFIX["ARTICLE"]}`;
-
-  const originalUrl = "https://www.edgechat.ai/";
   const markdown = article?.markdown ?? "";
-
-  const lastIndex = markdown.lastIndexOf(originalUrl);
+  const lastIndex = markdown.lastIndexOf(API_PATH);
 
   const result =
     lastIndex === -1
       ? markdown
-      : markdown.slice(0, lastIndex).replaceAll(originalUrl, replaceUrl) +
+      : markdown.slice(0, lastIndex).replaceAll(API_PATH, replaceUrl) +
         markdown.slice(lastIndex);
   return (
     <>
       <div className="sticky-top mb-2">
         <div className="article-header">
-          <ArticleHeaderPanel article={article} slug={slug} />
+          <ArticleHeader article={article} slug={slug} />
         </div>
       </div>
       {isError && (
@@ -59,76 +51,6 @@ export const ArticleComponent = ({ slug }: { slug: string }) => {
         </div>
       )}
     </>
-  );
-};
-
-const ArticleHeaderPanel = ({
-  article,
-  slug,
-}: {
-  article?: ResponseArticle;
-  slug: string;
-}) => {
-  const router = useRouter();
-
-  return (
-    <div className="position-relative overflow-hidden rounded-5">
-      <div className="glass d-flex justify-content-between align-items-center">
-        <div
-          className="d-flex w-100 align-items-center justify-content-between gap-2"
-          style={{ minWidth: 0 }}
-        >
-          <div className="d-flex gap-2 flex-row align-items-center">
-            <Button
-              className="glass rounded-circle p-2 flex-shrink-0"
-              style={{ width: "fit-content" }}
-              onClick={(e) => {
-                e.preventDefault();
-                router.history.back();
-              }}
-            >
-              <ArrowLeft />
-            </Button>
-            {article ? (
-              <div
-                className="d-flex flex-column lh-1 text-white flex-grow-1"
-                style={{ minWidth: 0 }}
-              >
-                <span className="line-clamp">{article?.title}</span>
-              </div>
-            ) : (
-              <SlugHeaderPlaceholder />
-            )}
-          </div>
-          <FavoriteButton
-            article={{
-              ...(article as ResultFavorite),
-            }}
-            slug={slug}
-            rounded
-          />
-        </div>
-      </div>
-      <Background value={slug} />
-    </div>
-  );
-};
-
-const SlugHeaderPlaceholder = () => {
-  return (
-    <div
-      className="d-flex flex-column lh-1"
-      style={{ width: "clamp(8rem, 40vw, 20rem)" }}
-    >
-      <Placeholder
-        as="span"
-        className="d-block"
-        style={{ marginBottom: "0.15rem" }}
-        animation="glow"
-      >
-        <Placeholder xs={6} />
-      </Placeholder>
-    </div>
   );
 };
 

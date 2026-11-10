@@ -12,6 +12,8 @@ import { routeTree } from "./routeTree.gen";
 
 const hashHistory = createHashHistory();
 
+export const API_PATH = "https://www.edgechat.ai/";
+
 // Set up a Router instance
 const router = createRouter({
   routeTree,

@@ -14,7 +14,7 @@ import { Link } from "@tanstack/react-router";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { getPrefix } from "@/lib/prefix";
 import { useFavorite } from "@/store/use-favorite";
-import { Background } from "./background";
+import { Background } from "@/components/background";
 import { Bookmark, BookmarkOff } from "lucide-react";
 import { FavoriteButton } from "./favorite-button";
 import { ResultFavorite } from "@/types/random";

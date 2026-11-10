@@ -1,11 +1,11 @@
 import { cn } from "cn";
 import { BookMarked, Search, X } from "lucide-react";
-import { FC, HTMLAttributes, useState } from "react";
+import { FC, FormEvent, HTMLAttributes, useState } from "react";
 import { Button } from "react-bootstrap";
 import "./search-button.css";
 import { SearchContent } from "./search-content";
 import { Children } from "@/types/subtopic";
-import { FavoriteContent } from "./favortie-content";
+import { FavoriteContent } from "@/components/favorite/favorite-content";
 
 type SearchButtonProps = {
   className?: string;
@@ -21,7 +21,7 @@ export const SearchButton: FC<SearchButtonProps> = ({
   const [startSearch, setStartSearch] = useState(false);
   const [startFavorite, setStartFavorite] = useState(false);
   const [searchSlug, setSearchSlug] = useState("");
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>, newData: string) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>, newData: string) => {
     e.preventDefault();
     setSearchSlug(newData);
   };
@@ -46,9 +46,7 @@ export const SearchButton: FC<SearchButtonProps> = ({
         </div>
       )}
       {startFavorite && (
-        <div
-          className="max-width-50 vh-100 top-0 vw-100 z-2 position-absolute"
-        >
+        <div className="max-width-50 vh-100 top-0 vw-100 z-2 position-absolute">
           <FavoriteContent />
         </div>
       )}
@@ -118,7 +116,6 @@ const SearchButtonInput: FC<SearchButtonInputProps> = ({
         placeholder="Search..."
         autoFocus
         value={inputSearch}
-        // onBlur={() => setStartSearch(false)}
         onChange={(e) => setInputSearch(e.target.value)}
         style={{ flex: 1 }}
       />

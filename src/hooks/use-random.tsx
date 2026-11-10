@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useArticleStore } from "../store/use-article-store";
 import type { ResponseRandom } from "../types/random";
+import { API_PATH } from "@/main";
 
 const FETCH_AMOUNT = 5;
 const REFETCH_BEFORE = 2;
@@ -21,7 +22,7 @@ async function fetchRandomBatch({
     const batch = await Promise.all(
       Array.from({ length: FETCH_AMOUNT - added }, async () => {
         const response = await fetch(
-          `https://www.edgechat.ai/api/v1/random${categoryId ? `?topic=${categoryId}` : ""}`,
+          `${API_PATH}api/v1/random${categoryId ? `?topic=${categoryId}` : ""}`,
           {
             signal,
           },
