@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import "./search-button.css";
 import { SearchContent } from "./search-content";
 import { FavoriteContent } from "@/components/favorite/favorite-content";
+import { useSearchFavorite } from "@/store/use-search-favorite";
 
 type SearchButtonProps = {
   className?: string;
@@ -15,13 +16,18 @@ export const SearchButton: FC<SearchButtonProps> = ({
   categoryId,
   ...props
 }) => {
-  const [startSearch, setStartSearch] = useState(false);
-  const [startFavorite, setStartFavorite] = useState(false);
-  const [searchSlug, setSearchSlug] = useState("");
+  const startSearch = useSearchFavorite((state) => state.startSearch);
+  const setStartSearch = useSearchFavorite((state) => state.setStartSearch);
+  const startFavorite = useSearchFavorite((state) => state.startFavorite);
+  const setStartFavorite = useSearchFavorite((state) => state.setStartFavorite);
+  const searchSlug = useSearchFavorite((state) => state.searchSlug);
+  const setSearchSlug = useSearchFavorite((state) => state.setSearchSlug);
+
   const onSubmit = (e: FormEvent<HTMLFormElement>, newData: string) => {
     e.preventDefault();
     setSearchSlug(newData);
   };
+
   return (
     <>
       {(startSearch || startFavorite) && (
