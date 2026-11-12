@@ -61,7 +61,7 @@ export const SearchContent: FC<SearchContentProps> = ({
   return (
     <div
       {...props}
-      className="overflow-hidden position-relative rounded-bottom-5 search-content"
+      className="overflow-hidden position-relative search-content"
       onClick={(e) => e.stopPropagation()}
     >
       <div

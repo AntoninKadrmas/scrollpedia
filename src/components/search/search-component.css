@@ -1,0 +1,98 @@
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+.search-input-form {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.max-width-50 {
+  max-width: 50rem;
+}
+
+.search-button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+/* Keep overlays within the visible viewport, including mobile browser chrome. */
+:root {
+  --feed-height: 100vh;
+  --overlay-top: calc(env(safe-area-inset-top, 0px));
+  --controls-bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+  --overlay-left: env(safe-area-inset-left, 0px);
+  --overlay-right: env(safe-area-inset-right, 0px);
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --feed-height: 100dvh;
+  }
+}
+
+.search-backdrop {
+  position: fixed;
+  opacity: 0.85;
+  inset: 0;
+}
+
+.search-panel,
+.search-controls {
+  position: fixed;
+  left: var(--overlay-left);
+  right: var(--overlay-right);
+  width: auto;
+  max-width: 50rem;
+  margin-inline: auto;
+}
+
+.search-panel {
+  top: var(--overlay-top);
+  height: max(0px, calc(var(--feed-height)));
+}
+
+.search-panel--search {
+  /* The input has a 24px icon / 40px field and 48px vertical padding. */
+  height: max(
+    0px,
+    calc(
+      var(--feed-height) - var(--overlay-top) - var(--controls-bottom) - 90px
+    )
+  );
+}
+
+.search-controls {
+  bottom: var(--controls-bottom);
+}
+
+.search-close {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 1rem);
+  right: calc(env(safe-area-inset-right, 0px) + 1rem);
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.search-content {
+  height: 100%;
+}
+
+.search-content > .overflow-auto {
+  overscroll-behavior: contain;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --controls-bottom: calc(env(safe-area-inset-bottom, 0px) + 3rem);
+  }
+}

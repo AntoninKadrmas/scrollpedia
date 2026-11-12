@@ -52,7 +52,6 @@ export const SearchContentVirtualizer: FC<SearchContentVirtualizerType> = ({
     count: hasNextPage ? allRows.length + 1 : allRows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: (index) => (index === allRows.length ? 74 : ARTICLE_HEIGHT),
-    paddingEnd: 90,
     overscan: 5,
   });
   return (

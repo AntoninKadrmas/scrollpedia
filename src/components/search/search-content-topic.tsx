@@ -45,7 +45,7 @@ export const SearchContentTopic: FC<SearchContentTopicType> = ({
         />
       )}
       {!isError && (
-        <div className="overflow-auto px-2" style={{ paddingBottom: "100px" }}>
+        <div className="px-2 pb-3">
           <h2 className="text-center text-white mt-5">
             {categoryId
               ? `Choose a subtopic of (${subtopicData?.label}):`

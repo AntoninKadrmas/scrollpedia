@@ -1,6 +1,6 @@
 import { useRandom } from "@/hooks/use-random";
 import { Background } from "@/components/background";
-import { SearchButton } from "@/components/search/search-button";
+import { SearchComponent } from "@/components/search/search-component";
 import { useArticleStore } from "@/store/use-article-store";
 import { EmblaCarousel } from "@/components/feed/embla-carousel";
 import { useQuery } from "@tanstack/react-query";
@@ -41,10 +41,10 @@ export const FeedComponent = ({
   const slug = data?.result?.slug ?? "some random";
 
   return (
-    <div className="position-relative overflow-hidden vw-100 vh-100 d-flex justify-content-center align-items-center flex-column">
+    <div className="position-relative overflow-hidden vw-100 feed-viewport d-flex justify-content-center align-items-center flex-column">
       {isError && (
         <ErrorRefetch
-          className="vh-100"
+          className="h-100"
           refetch={refetch}
           disabled={isLoading}
         />
@@ -58,7 +58,7 @@ export const FeedComponent = ({
         />
       )}
       <Background value={slug} />
-      <SearchButton categoryId={categoryId} />
+      <SearchComponent categoryId={categoryId} />
     </div>
   );
 };
