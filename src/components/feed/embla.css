@@ -1,10 +1,16 @@
+.feed-viewport {
+  height: var(--feed-height);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
 .embla {
   width: 100%;
   min-width: 0;
   max-width: 48rem;
   margin: auto;
 
-  --slide-height: 100vh;
+  --slide-height: var(--feed-height);
   --slide-spacing: 2rem;
   --slide-size: 100%;
 }

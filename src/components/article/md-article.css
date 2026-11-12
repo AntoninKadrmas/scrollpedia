@@ -9,7 +9,9 @@
 }
 
 .article-header {
-  padding: 1rem 1rem 1rem;
+  padding: calc(1rem + env(safe-area-inset-top, 0px))
+    calc(1rem + env(safe-area-inset-right, 0px)) 1rem
+    calc(1rem + env(safe-area-inset-left, 0px));
   max-width: 54rem;
   margin: auto;
 }
