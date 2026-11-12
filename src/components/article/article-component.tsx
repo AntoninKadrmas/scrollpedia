@@ -23,13 +23,9 @@ export const ArticleComponent = ({ slug }: { slug: string }) => {
   const fullUrl = window.location.href.split("/");
   const replaceUrl = `${fullUrl.slice(0, -1).join("/")}/${PREFIX["ARTICLE"]}`;
   const markdown = article?.markdown ?? "";
-  const lastIndex = markdown.lastIndexOf(API_PATH);
 
-  const result =
-    lastIndex === -1
-      ? markdown
-      : markdown.slice(0, lastIndex).replaceAll(API_PATH, replaceUrl) +
-        markdown.slice(lastIndex);
+  let result = markdown.replaceAll(`](${API_PATH}`, `](${replaceUrl}`);
+
   return (
     <>
       <div className="sticky-top mb-2">

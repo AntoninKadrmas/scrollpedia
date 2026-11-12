@@ -1,6 +1,6 @@
 # The Scrollpedia
 
-Web app build around [edgechat.ai/api](https://www.edgechat.ai/developers) wich offers a lot of articles in markdown format. App lets user to swipe to explore new articles read articles in app, search for articles or filer the search and feed by category, and save favorite articles.
+Web app build around [edgechat.org/api](https://www.edgechat.org/developers) wich offers a lot of articles in markdown format. App lets user to swipe to explore new articles read articles in app, search for articles or filer the search and feed by category, and save favorite articles.
 
 ## Set up
 
@@ -59,15 +59,15 @@ For the different icons I used [lucide icons](https://lucide.dev/).
 
 For the project I decided to use the:
 
-[Edgepedia API](https://www.edgechat.ai/developers)
+[Edgepedia API](https://www.edgechat.org/developers)
 *More than 500,000 encyclopedia articles and constantly growing, as JSON. Free. No key, no sign-up. Commercial use with credit. AI training open to everyone.*
 
 | route | description |
 |-------|-------------|
-| [/random](www.edgechat.ai/api/v1/random) | endpoint used on the feed component to discover new random articles |
-| [/search](www.edgechat.ai/api/v1/search?q=koala) | endpoint to search any custom article |
-| [/topic](www.edgechat.ai/api/v1/topics) | endpoint to filter random and search articles by the different topics |
-| [/articles](www.edgechat.ai/api/v1/articles/koala) | endpoint to get more info about the article and for the markdown wich is than displayed for the user to read |
+| [/random](www.edgechat.org/api/v1/random) | endpoint used on the feed component to discover new random articles |
+| [/search](www.edgechat.org/api/v1/search?q=koala) | endpoint to search any custom article |
+| [/topic](www.edgechat.org/api/v1/topics) | endpoint to filter random and search articles by the different topics |
+| [/articles](www.edgechat.org/api/v1/articles/koala) | endpoint to get more info about the article and for the markdown wich is than displayed for the user to read |
 
 ## User manual
 
@@ -79,4 +79,4 @@ You can read more on article to get on page with its content. Each article can b
 
 The popover from search or favorite can be closed by clicking on X button in right top corner. Or on bigger displays by clicking on the dark overlay outside of the gradient overlay.
 
-Use the navigation in app if you do not want the fetched article feed to be reloaded.
+Use the navigation in app if you do not want the fetched article feed to be reloaded. 
