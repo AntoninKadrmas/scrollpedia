@@ -1,0 +1,1 @@
+import{t as e}from"./feed-component-Dcdh7w_4.js";import{x as t}from"./index-Cn9-g1gh.js";var n=t();function r(){return(0,n.jsx)(e,{categoryId:null})}export{r as component};
