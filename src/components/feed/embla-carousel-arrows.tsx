@@ -1,7 +1,10 @@
 import { ComponentPropsWithRef, useCallback, useEffect, useState } from "react";
 import { EmblaCarouselType } from "embla-carousel";
 import { Button } from "react-bootstrap";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, FileText } from "lucide-react";
+import { ResponseRandom } from "@/types/random";
+import { Link } from "@tanstack/react-router";
+import { getPrefix } from "@/lib/prefix";
 
 type UsePrevNextButtonsType = {
   prevBtnDisabled: boolean;
@@ -62,6 +65,30 @@ export const PrevButton = (props: PropType) => {
       <ChevronUp className="h-6 w-6" />
       {children}
     </Button>
+  );
+};
+
+export const FileButton = (props: PropType & { data: ResponseRandom }) => {
+  const { children, disabled, data, ...restProps } = props;
+
+  return (
+    <Link
+      to={"/$slug"}
+      params={{
+        slug: getPrefix(data.result.slug, "ARTICLE"),
+      }}
+    >
+      <Button
+        className={"embla__button h-10 w-10 p-2 d-flex justify-content-center align-items-center rounded-circle glass".concat(
+          disabled ? " embla__button--disabled" : "",
+        )}
+        type="button"
+        {...restProps}
+      >
+        <FileText className="h-6 w-6" />
+        {children}
+      </Button>
+    </Link>
   );
 };
 

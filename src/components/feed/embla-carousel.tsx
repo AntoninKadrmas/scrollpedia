@@ -5,6 +5,7 @@ import { ResponseRandom } from "@/types/random";
 import "./embla.css";
 import { useArticleStore } from "@/store/use-article-store";
 import {
+  FileButton,
   NextButton,
   PrevButton,
   usePrevNextButtons,
@@ -17,6 +18,7 @@ import {
   EmblacarouselCard,
   EmblacarouselCardPlaceholder,
 } from "./embla-carousel-card";
+import { RoundedButtonPlaceholder } from "../favorite/favorite-button";
 
 type EmblaCarouselProps = {
   slides: ResponseRandom[];
@@ -85,8 +87,13 @@ export const EmblaCarousel: FC<EmblaCarouselProps> = ({
           {!isLoading && <EmblaCarouselLast />}
         </div>
       </div>
-      <div className="embla__arrows d-none d-lg-flex flex-column ms-2 gap-1 h-100 justify-content-end position-absolute end-0 me-5 bottom-50">
+      <div className="d-none d-lg-flex flex-column ms-2 gap-1 position-fixed top-50 end-0 translate-middle-y me-5">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+        {slides.length > 0 ? (
+          <FileButton data={slides[props.position]} />
+        ) : (
+          <RoundedButtonPlaceholder rounded />
+        )}
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
     </div>

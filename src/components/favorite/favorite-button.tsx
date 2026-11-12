@@ -24,7 +24,7 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
 }) => {
   const toggleFavorite = useFavorite((state) => state.toggleFavorite);
   const isFavorite = useFavorite((state) => state.isFavorite(slug));
-  if (!article) return <FavoriteButtonPlaceholder rounded={rounded} />;
+  if (!article) return <RoundedButtonPlaceholder rounded={rounded} />;
   return (
     <Button
       {...props}
@@ -43,7 +43,7 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
   );
 };
 
-export const FavoriteButtonPlaceholder = ({
+export const RoundedButtonPlaceholder = ({
   rounded,
 }: {
   rounded?: boolean;

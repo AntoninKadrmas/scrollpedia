@@ -9,7 +9,7 @@ type backgroundProps = {
 export const Background: FC<backgroundProps> = ({ ...props }) => {
   return (
     <div
-      className="position-absolute top-50 start-50 translate-middle w-100 h-100 z-n1"
+      className="position-absolute top-50 start-50 translate-middle vw-100 vh-100 z-n1"
       style={{
         filter: "blur(150px)",
         backgroundImage: generateGradient(props.value),
