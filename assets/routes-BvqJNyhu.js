@@ -1,1 +1,0 @@
-import{t as e}from"./feed-component-BEny3V9J.js";import{x as t}from"./index-BeU1zLaH.js";var n=t();function r(){return(0,n.jsx)(e,{categoryId:null})}export{r as component};
