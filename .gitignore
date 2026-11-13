@@ -27,3 +27,5 @@ dist-ssr
 *.gen.ts
 *.gen.tsx
 .tanstack
+~*.tmp
+~*.docx
