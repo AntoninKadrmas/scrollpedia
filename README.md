@@ -2,6 +2,38 @@
 
 Web app build around [edgechat.org/api](https://www.edgechat.org/developers) wich offers a lot of articles in markdown format. App lets user to swipe to explore new articles read articles in app, search for articles or filer the search and feed by category, and save favorite articles.
 
+<table align="center">
+  <tr>
+    <td align="center">
+      <p>Feed view</p>
+      <img src="./docs/imgs/image.png" alt="Feed view untouched" width="300">
+    </td>
+    <td align="center">
+      <p>Feed view</p>
+      <img src="./docs/imgs/image-1.png" alt="Feed view while scrolling" width="300">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p>Topic/Search view</p>
+      <img src="./docs/imgs/image-2.png" alt="Search view untouched" width="300">
+    </td>
+    <td align="center">
+      <p>Search view</p>
+      <img src="./docs/imgs/image-3.png" alt="Search view while searching" width="300">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p>Favorite view</p>
+      <img src="./docs/imgs/image-5.png" alt="Favorite view with 4 favorites" width="300">
+    </td>
+    <td align="center">
+      <p>Article view</p>
+      <img src="./docs/imgs/image-4.png" alt="Article view" width="300">
+    </td>
+  </tr>
+</table>
 ## Set up
 
 For the local development firstly clone the rope to your own machine:
@@ -80,3 +112,12 @@ You can read more on article to get on page with its content. Each article can b
 The popover from search or favorite can be closed by clicking on X button in right top corner. Or on bigger displays by clicking on the dark overlay outside of the gradient overlay.
 
 Use the navigation in app if you do not want the fetched article feed to be reloaded. 
+
+## Final design
+The design image is also a link to the excalidraw file.
+<div align="center">
+  <a href="./docs/final_design_file.excalidraw">
+    <img src="./docs/imgs/design_export.png" alt="Final design" width="100%">
+  </a>
+</div>
+
