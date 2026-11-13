@@ -2,7 +2,7 @@
 
 Web app build around [edgechat.org/api](https://www.edgechat.org/developers) wich offers a lot of articles in markdown format. App lets user to swipe to explore new articles read articles in app, search for articles or filer the search and feed by category, and save favorite articles.
 
-<table align="center" width="100%" >
+<table align="center" width="100%">
   <tr>
     <td align="center" width="50%">
       <p>Feed view</p>
@@ -34,6 +34,7 @@ Web app build around [edgechat.org/api](https://www.edgechat.org/developers) wic
     </td>
   </tr>
 </table>
+
 ## Set up
 
 For the local development firstly clone the rope to your own machine:
