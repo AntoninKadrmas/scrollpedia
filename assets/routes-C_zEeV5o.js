@@ -1,1 +1,0 @@
-import{t as e}from"./feed-component-PDE0SeA_.js";import{x as t}from"./index-B5SZbzqS.js";var n=t();function r(){return(0,n.jsx)(e,{categoryId:null})}export{r as component};
