@@ -1,18 +1,12 @@
 import { FC, HTMLAttributes, useRef, useState } from "react";
-import {
-  Button,
-  Modal,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from "react-bootstrap";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useFavorite } from "@/store/use-favorite";
 import { Background } from "@/components/background";
-import { Bookmark, BookmarkOff } from "lucide-react";
+import { Bookmark } from "lucide-react";
 import { ResultFavorite } from "@/types/random";
 import { useSearchFavorite } from "@/store/use-search-favorite";
 import { ContentCard } from "../search/content-card";
+import { FavoriteContentModal } from "./favorite-content-modal";
 
 type FavoriteContentProps = {
   className?: string;
@@ -22,7 +16,6 @@ const ARTICLE_HEIGHT = 166;
 
 export const FavoriteContent: FC<FavoriteContentProps> = ({ ...props }) => {
   const favorites = useFavorite((state) => state.favorites);
-  const toggleFavorite = useFavorite((state) => state.toggleFavorite);
   const scrollOffsets = useSearchFavorite((state) => state.scrollOffsets);
   const setScrollOffset = useSearchFavorite((state) => state.setScrollOffset);
 
@@ -96,30 +89,7 @@ export const FavoriteContent: FC<FavoriteContentProps> = ({ ...props }) => {
         </div>
       </div>
       <Background value={favorites.length.toString()} />
-      <Modal show={!!show} onHide={handleClose} centered>
-        <ModalHeader closeButton>
-          <ModalTitle>Remove Favorite</ModalTitle>
-        </ModalHeader>
-        <Modal.Body>
-          <p>Are you sure you want to remove this favorite?</p>
-          <strong>{show?.title}</strong>
-        </Modal.Body>
-        <ModalFooter>
-          <Button variant="outline-secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button
-            variant="danger"
-            className="d-flex gap-1 align-items-center"
-            onClick={() => {
-              if (show) toggleFavorite(show);
-              handleClose();
-            }}
-          >
-            Remove <BookmarkOff />
-          </Button>
-        </ModalFooter>
-      </Modal>
+      <FavoriteContentModal handleClose={handleClose} show={show} />
     </div>
   );
 };
