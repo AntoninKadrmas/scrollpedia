@@ -2,35 +2,35 @@
 
 Web app build around [edgechat.org/api](https://www.edgechat.org/developers) wich offers a lot of articles in markdown format. App lets user to swipe to explore new articles read articles in app, search for articles or filer the search and feed by category, and save favorite articles.
 
-<table align="center">
+<table align="center" width="100%" >
   <tr>
-    <td align="center">
+    <td align="center" width="50%">
       <p>Feed view</p>
-      <img src="./docs/imgs/image.png" alt="Feed view untouched" width="300">
+      <img src="./docs/imgs/image.png" alt="Feed view untouched" width="100%">
     </td>
-    <td align="center">
-      <p>Feed view</p>
-      <img src="./docs/imgs/image-1.png" alt="Feed view while scrolling" width="300">
+    <td align="center" width="50%">
+      <p>Feed view while scrolling</p>
+      <img src="./docs/imgs/image-1.png" alt="Feed view while scrolling" width="100%">
     </td>
   </tr>
   <tr>
-    <td align="center">
+    <td align="center" width="50%">
       <p>Topic/Search view</p>
-      <img src="./docs/imgs/image-2.png" alt="Search view untouched" width="300">
+      <img src="./docs/imgs/image-2.png" alt="Search view untouched" width="100%">
     </td>
-    <td align="center">
+    <td align="center" width="50%">
       <p>Search view</p>
-      <img src="./docs/imgs/image-3.png" alt="Search view while searching" width="300">
+      <img src="./docs/imgs/image-3.png" alt="Search view while searching" width="100%">
     </td>
   </tr>
   <tr>
-    <td align="center">
+    <td align="center" width="50%">
       <p>Favorite view</p>
-      <img src="./docs/imgs/image-5.png" alt="Favorite view with 4 favorites" width="300">
+      <img src="./docs/imgs/image-5.png" alt="Favorite view with 4 favorites" width="100%">
     </td>
-    <td align="center">
+    <td align="center" width="50%">
       <p>Article view</p>
-      <img src="./docs/imgs/image-4.png" alt="Article view" width="300">
+      <img src="./docs/imgs/image-4.png" alt="Article view" width="100%">
     </td>
   </tr>
 </table>
