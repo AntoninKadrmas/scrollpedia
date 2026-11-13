@@ -1,24 +1,18 @@
 import { FC, HTMLAttributes, useRef, useState } from "react";
 import {
   Button,
-  Card,
-  CardBody,
-  CardText,
-  CardTitle,
   Modal,
   ModalFooter,
   ModalHeader,
   ModalTitle,
 } from "react-bootstrap";
-import { Link } from "@tanstack/react-router";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { getPrefix } from "@/lib/prefix";
 import { useFavorite } from "@/store/use-favorite";
 import { Background } from "@/components/background";
 import { Bookmark, BookmarkOff } from "lucide-react";
-import { FavoriteButton } from "./favorite-button";
 import { ResultFavorite } from "@/types/random";
 import { useSearchFavorite } from "@/store/use-search-favorite";
+import { ContentCard } from "../search/content-card";
 
 type FavoriteContentProps = {
   className?: string;
@@ -95,35 +89,7 @@ export const FavoriteContent: FC<FavoriteContentProps> = ({ ...props }) => {
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-                <Card className="glass h-fit rounded-0">
-                  <CardBody>
-                    <CardTitle className="text-white line-clamp">
-                      {article.title}
-                    </CardTitle>
-                    <CardText className="line-clamp-2">
-                      {article.snippet}
-                    </CardText>
-                    <div className="d-flex align-items-stretch gap-2">
-                      <Link
-                        to="/$slug"
-                        style={{ flex: 1 }}
-                        params={{ slug: getPrefix(article.slug, "ARTICLE") }}
-                      >
-                        <Button className="w-100 glass">Read more...</Button>
-                      </Link>
-                      <FavoriteButton
-                        article={article}
-                        style={{
-                          height: 38,
-                          width: 38,
-                        }}
-                        className="glass d-flex align-items-center justify-content-center"
-                        slug={article?.slug}
-                        onClick={() => handleShow(article)}
-                      />
-                    </div>
-                  </CardBody>
-                </Card>
+                <ContentCard article={article} handleShow={handleShow} />
               </div>
             );
           })}

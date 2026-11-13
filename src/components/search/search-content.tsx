@@ -9,10 +9,8 @@ import {
   searchScrollKey,
   useSearchFavorite,
 } from "@/store/use-search-favorite";
-import {
-  SearchContentPlaceholder,
-  SearchContentVirtualizer,
-} from "./search-content-virtualizer";
+import { SearchContentVirtualizer } from "./search-content-virtualizer";
+import { ContentCardPlaceholder } from "./content-card";
 
 type SearchContentProps = {
   className?: string;
@@ -106,7 +104,7 @@ export const SearchContent: FC<SearchContentProps> = ({
         {isFetching &&
           !isFetchingNextPage &&
           Array.from({ length: 4 }).map((_, index) => (
-            <SearchContentPlaceholder key={index} />
+            <ContentCardPlaceholder key={index} />
           ))}
       </div>
       <Background value={slug} />

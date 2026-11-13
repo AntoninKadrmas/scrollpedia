@@ -4,11 +4,11 @@ export interface ResponseSearch {
   total: number;
   page: number;
   pages: number;
-  results: Result[];
+  results: ResultSearch[];
   license: License;
 }
 
-export interface Result {
+export interface ResultSearch {
   id: string;
   slug: string;
   title: string;
